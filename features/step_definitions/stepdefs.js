@@ -14,23 +14,38 @@ Given('I am on the login page', async function () {
 
 // Enter email
 When('I enter my email as {string}', async function (email) {
-  const emailInput = await this.driver.wait(until.elementLocated(By.id('userName')));
+  const emailInput = await driver.wait(until.elementLocated(By.id('userName')));
   await emailInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
   await emailInput.sendKeys(email);
 });
 
 // Enter password
 When('I enter my password as {string}', async function (password) {
-  const passwordInput = await this.driver.wait(until.elementLocated(By.id('passWord')));
+  const passwordInput = await driver.wait(until.elementLocated(By.id('passWord')));
   await passwordInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
   await passwordInput.sendKeys(password);
 });
 
 // Click on the specified button
 When('I click on the {string} button', async function (button) {
-  const buttonElement = await this.driver.wait(until.elementLocated(By.id(button)));
+  const buttonElement = await driver.wait(until.elementLocated(By.id(button)));
   await buttonElement.click();
 });
+
+
+Then('I should see a pop up window', async function () {
+  const window = await driver.wait(until.elementLocated(By.xpath(`//*[contains(text(), "Verify your Identity")]`)));
+});
+
+When('I click on {string} button', async function (selectPreference) {
+  const preference = await drivit.wait(until.elementLocated(By.id))
+});
+
+And I select my Preference
+And I click on "send" button
+And I navigate to otp verification page
+And I enter otp as "981256"
+
 
 // Verify navigation to profile page
 Then('I navigate to profile page', async function () {
