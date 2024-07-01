@@ -52,7 +52,16 @@ When('I click on the {string} button', async function (button) {
           break;
       case 'Resend OTP':
           buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Resend OTP")]')));        
-          break;    
+          break;  
+      case 'Forgot password':
+          buttonElement = await this.driver.wait(until.elementLocated(By.id('forgot')));        
+          break; 
+      case 'Request Reset Link':
+          buttonElement = await this.driver.wait(until.elementLocated(By.id('reset_link')));        
+          break;
+      case 'Back to Login':
+          buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Back to Login")]')));        
+          break;
           
       default:
           console.log('Invalid button string');

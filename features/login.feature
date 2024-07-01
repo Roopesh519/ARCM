@@ -36,7 +36,7 @@ Feature: Login to ARCM
     # step def pending
     Scenario: I forgot the password
         Given I am on the login page   
-        When I click on the "Forgot password" button  # add button
+        When I click on the "Forgot password" button  # added button |  done
         Then I must navigate to Forgot Password page  # do
 
 
@@ -48,20 +48,20 @@ Feature: Login to ARCM
     Scenario: I request for reset link with wrong username
         Given I am on the forgot password page
         When I enter wrong username   # do
-        And I click on the "Request Reset Link"  # add button
+        And I click on the "Request Reset Link" button # added button |  done
         Then I see a message "Invalid username"
 
 
     Scenario: I request for reset link with correct username
         Given I am on the forgot password page
         When I enter username "roopesh.yadava@7edge.com"  # do
-        And I click on the "Request Reset Link" button # add button
+        And I click on the "Request Reset Link" button # added button |  done
         Then I see a message "Password reset link has been sent to your registered email address"
 
 
     Scenario: I request for reset link and go back to login
         Given I am on the forgot password page
-        When I click on the "Back to Login" button # add button
+        When I click on the "Back to Login" button # added button |  done
         Then I navigate to login page 
     # forgot password end
 
