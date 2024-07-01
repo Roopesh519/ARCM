@@ -7,7 +7,7 @@ Feature: Login to ARCM
         Given I am on the login page
         And I enter my username as "<username>"
         And I enter my password as "<email>"
-        Then I click on "Login" button
+        Then I click on the "Login" button
         Then my details should be validated with "<message>"
 
         Examples:
@@ -26,11 +26,43 @@ Feature: Login to ARCM
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
-        When I click on "Select Preference" button
+        When I click on the "Select Preference" button
         And I select my Preference
-        When I click on "Cancel" button # done
+        When I click on the "Cancel" button # done
         Then I navigate to login page # done
 
+    # forgot password start 
+    # step def pending
+    Scenario: I forgot the password
+        Given I am on the login page   
+        When I click on the "Forgot password" button  # add button
+        Then I must navigate to Forgot Password page  # do
+
+
+    Scenario: I try to request for reset link with disabled button
+        Given I am on the forgot password page     # do
+        Then the Request Reset Link button is disabled   # do
+
+
+    Scenario: I request for reset link with wrong username
+        Given I am on the forgot password page
+        When I enter wrong username   # do
+        And I click on the "Request Reset Link"  # add button
+        Then I see a message "Invalid username"
+
+
+    Scenario: I request for reset link with correct username
+        Given I am on the forgot password page
+        When I enter username "roopesh.yadava@7edge.com"  # do
+        And I click on the "Request Reset Link" button # add button
+        Then I see a message "Password reset link has been sent to your registered email address"
+
+
+    Scenario: I request for reset link and go back to login
+        Given I am on the forgot password page
+        When I click on the "Back to Login" button # add button
+        Then I navigate to login page 
+    # forgot password end
 
     Scenario: Login with empty otp
         Given I am on the login page
@@ -38,9 +70,9 @@ Feature: Login to ARCM
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
-        When I click on "Select Preference" button
+        When I click on the "Select Preference" button
         And I select my Preference
-        And I click on "send" button
+        And I click on the "send" button
         Then I see otp verification page
         And I see Verify OTP button disabled  # done
 
@@ -51,12 +83,12 @@ Feature: Login to ARCM
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
-        When I click on "Select Preference" button
+        When I click on the "Select Preference" button
         And I select my Preference
-        And I click on "send" button
+        And I click on the "send" button
         Then I see otp verification page
         When I click the button with text "Back to Login" # done
-        Then I navigate to login page # step definition
+        Then I navigate to login page # done
 
 
     Scenario: Login with invalid otp
@@ -65,9 +97,9 @@ Feature: Login to ARCM
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
-        When I click on "Select Preference" button
+        When I click on the "Select Preference" button
         And I select my Preference
-        And I click on "send" button
+        And I click on the "send" button
         Then I see otp verification page
         When I enter otp as "982134"
         Then I should see a message "You entered an invalid OTP.Please try again"
@@ -79,11 +111,11 @@ Feature: Login to ARCM
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
-        When I click on "Select Preference" button
+        When I click on the "Select Preference" button
         And I select my Preference
-        And I click on "send" button
+        And I click on the "send" button
         Then I see otp verification page
-        When I click on "Resend OTP" button
+        When I click on the "Resend OTP" button
         Then I should see a message "OTP resent successfully"
 
     
@@ -94,13 +126,13 @@ Feature: Login to ARCM
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
-        When I click on "Select Preference" button
+        When I click on the "Select Preference" button
         And I select my Preference
-        And I click on "send" button
+        And I click on the "send" button
         Then I see otp verification page
         When I enter otp as "981256"
-        And I click on "verify otp" button
+        And I click on the "verify otp" button
         Then I see a message Do you want to trust this browser
-        When I click on "No, I dont" button
+        When I click on the "No, I dont" button
         Then I navigate to profile page
         And I should see a message "Login Successful"

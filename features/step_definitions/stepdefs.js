@@ -49,6 +49,11 @@ When('I click on the {string} button', async function (button) {
           break;
       case 'Cancel':
           buttonElement = await this.driver.wait(until.elementLocated(By.id('Cancel')));        
+          break;
+      case 'Resend OTP':
+          buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Resend OTP")]')));        
+          break;    
+          
       default:
           console.log('Invalid button string');
           return; 
