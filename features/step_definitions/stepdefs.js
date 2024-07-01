@@ -52,12 +52,15 @@ When('I click on the {string} button', async function (button) {
           break;
       case 'Resend OTP':
           buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Resend OTP")]')));        
-          break;
+          break;  
       case 'Forgot password':
-        buttonElement = await this.driver.wait(until.elementLocated(By.id('forgot')));  
-          break;      
+          buttonElement = await this.driver.wait(until.elementLocated(By.id('forgot')));        
+          break; 
       case 'Request Reset Link':
-        buttonElement = await this.driver.wait(until.elementLocated(By.id('reset_link')));        
+          buttonElement = await this.driver.wait(until.elementLocated(By.id('reset_link')));        
+          break;
+      case 'Back to Login':
+          buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Back to Login")]')));        
           break;
           
       default:
@@ -124,67 +127,38 @@ Then('I should see a message {string}', async function (message) {
 
 
 Then('I see Verify OTP button disabled', async function () {
-  const button = await driver.findElement(By.id('otp-form'));
+  const button = await driver.wait(untill.elementLocated(By.id('otp-form')));
   const isDisabled = await button.getAttribute('disabled');
   assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
 });
 
 
 When('I click the button with text {string}', async function (buttonText) {
-  const button = await driver.findElement(By.xpath(`//button[span[text()='${buttonText}']]`));
+  const button = await driver.wait(until.elementLocated(By.xpath(`//button[span[text()='${buttonText}']]`)));
   await button.click();
 });
 
-Then('I am on the forgot password page', async function () {
-  await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Forgot Password")]')));
+
+Then('I must navigate to Forgot Password page', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('[//*contains(text(), "Forgot Password"')));
 });
 
-Then('The Request Reset Link button is disabled', async function () {
-  const button = await driver.findElement(By.id('reset_link'));
+
+Given('I am on the forgot password page', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('[//*contains(text(), "Forgot Password"')));
+});
+
+
+Then('the Request Reset Link button is disabled', async function(){
+  const button = await driver.wait(untill.elementLocated(By.id('reset_link')));
   const isDisabled = await button.getAttribute('disabled');
   assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
 });
 
-When('I enter my username as', async function () {
+
+When('I enter wrong username', async function () {
+  const userName = 'random@7edge.com';
   const userNameInput = await driver.wait(until.elementLocated(By.id('userName')));
-  await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE); 
-  await userNameInput.sendKeys('roopesh.yadava'); 
+  await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+  await userNameInput.sendKeys(userName);
 });
-
-Then('I see a message {string}', async function (message) {
-  let messageElement;
-  switch(message) {
-      case 'Do you want to trust this browser':
-          messageElement = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Do you want to trust this browser")]')));
-          break;
-      case 'Password reset link has been sent to your registered email address':
-          messageElement = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Password reset link has been sent to your registered email address")]')));
-          break;
-      default:
-          console.log('Invalid message string');
-          return;
-  }
-  assert(messageElement !== null, `Message "${message}" not found on the page`);
-});
-
-//Then('I see a message "Invalid username"', async function () {
-//  const errorMessage = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Invalid username")]')));
-//  assert(errorMessage !== null, 'Expected "Invalid username" message not found on the page');
-//});
-
-//Then('I see a message "Password reset link has been sent to your registered email address"', async function () {
-// const resetMessage = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Password reset link has been sent to your registered email address")]')));
-//  assert(resetMessage !== null, 'Expected "Password reset link has been sent to your registered email address" message not found on the page');
-//});
-
-
-When('I enter my username as "roopesh.yadava@7edge.com"', async function () {
-  const userNameInput = await driver.wait(until.elementLocated(By.id('userName')));
-  await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE); 
-  await userNameInput.sendKeys('roopesh.yadava@7edge.com'); 
-});
-
- 
-
-
-
