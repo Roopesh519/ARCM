@@ -2,6 +2,25 @@ Feature: Login to ARCM
     As a admin
     I want to login to the ARCM
 
+    # Unhappy Paths
+    Scenario Outline: Login with invalid or empty details
+        Given I am on the login page
+        And I enter my username as "<username>"
+        And I enter my password as "<email>"
+        Then I click on "Login" button
+        Then my details should be validated with "<message>"
+
+        Examples:
+
+        | username                | password   | message                                       |
+        |                         |            | Please fill in all the mandatory fields       |
+        | abc@example.com         |            | Please fill in all the mandatory fields       |
+        |                         | Admin@123  | Please fill in all the mandatory fields       |
+        | def@example.com         | admin@123  | Incorrect username or password.               |
+        | random                  | admin@123  | Invalid username                              |
+
+
+    # Happy paths
     Scenario: Login with valid credentials
         Given I am on the login page
         When I enter my email as "roopesh.yadava@7edge.com"
@@ -17,4 +36,4 @@ Feature: Login to ARCM
         Then I see a message Do you want to trust this browser
         When I click on "No, I dont" button
         Then I navigate to profile page
-        And I should see a message "Login Successfull"
+        And I should see a message "Login Successful"
