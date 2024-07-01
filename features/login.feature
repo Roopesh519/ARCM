@@ -20,6 +20,73 @@ Feature: Login to ARCM
         | random                  | admin@123  | Invalid username                              |
 
 
+    Scenario: Cancel preference selection
+        Given I am on the login page
+        When I enter my email as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@123"
+        And I click on the "login" button
+        Then I should see a a dialog box to select preference for otp verification 
+        When I click on "Select Preference" button
+        And I select my Preference
+        When I click on "Cancel" button # add button
+        Then I am still on the login page # step defintion
+
+
+    Scenario: Login with empty otp
+        Given I am on the login page
+        When I enter my email as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@123"
+        And I click on the "login" button
+        Then I should see a a dialog box to select preference for otp verification 
+        When I click on "Select Preference" button
+        And I select my Preference
+        And I click on "send" button
+        Then I see otp verification page
+        And I see Verify OTP button disabled  # step defintion
+
+
+    Scenario: Return to login from OTP Verification
+        Given I am on the login page
+        When I enter my email as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@123"
+        And I click on the "login" button
+        Then I should see a a dialog box to select preference for otp verification 
+        When I click on "Select Preference" button
+        And I select my Preference
+        And I click on "send" button
+        Then I see otp verification page
+        When I click the button with text "Back to Login" # step definition
+        Then I navigate to login page # step definition
+
+
+    Scenario: Login with invalid otp
+        Given I am on the login page
+        When I enter my email as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@123"
+        And I click on the "login" button
+        Then I should see a a dialog box to select preference for otp verification 
+        When I click on "Select Preference" button
+        And I select my Preference
+        And I click on "send" button
+        Then I see otp verification page
+        When I enter otp as "982134"
+        Then I should see a message "You entered an invalid OTP.Please try again"
+
+
+    Scenario: Resend OTP
+        Given I am on the login page
+        When I enter my email as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@123"
+        And I click on the "login" button
+        Then I should see a a dialog box to select preference for otp verification 
+        When I click on "Select Preference" button
+        And I select my Preference
+        And I click on "send" button
+        Then I see otp verification page
+        When I click on "Resend OTP" button
+        Then I should see a message "OTP resent successfully"
+
+    
     # Happy paths
     Scenario: Login with valid credentials
         Given I am on the login page

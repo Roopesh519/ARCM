@@ -104,3 +104,16 @@ Then('I should see a message {string}', async function (message) {
       assert.ok(check, 'passed');
     }
 });
+
+
+Then('the button with id {string} should be disabled', async function (buttonId) {
+  const button = await driver.findElement(By.id(buttonId));
+  const isDisabled = await button.getAttribute('disabled');
+  assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
+});
+
+
+When('I click the button with text {string}', async function (buttonText) {
+  const button = await driver.findElement(By.xpath(`//button[span[text()='${buttonText}']]`));
+  await button.click();
+});
