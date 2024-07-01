@@ -127,13 +127,38 @@ Then('I should see a message {string}', async function (message) {
 
 
 Then('I see Verify OTP button disabled', async function () {
-  const button = await driver.findElement(By.id('otp-form'));
+  const button = await driver.wait(untill.elementLocated(By.id('otp-form')));
   const isDisabled = await button.getAttribute('disabled');
   assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
 });
 
 
 When('I click the button with text {string}', async function (buttonText) {
-  const button = await driver.findElement(By.xpath(`//button[span[text()='${buttonText}']]`));
+  const button = await driver.wait(until.elementLocated(By.xpath(`//button[span[text()='${buttonText}']]`)));
   await button.click();
+});
+
+
+Then('I must navigate to Forgot Password page', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('[//*contains(text(), "Forgot Password"')));
+});
+
+
+Given('I am on the forgot password page', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('[//*contains(text(), "Forgot Password"')));
+});
+
+
+Then('the Request Reset Link button is disabled', async function(){
+  const button = await driver.wait(untill.elementLocated(By.id('reset_link')));
+  const isDisabled = await button.getAttribute('disabled');
+  assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
+});
+
+
+When('I enter wrong username', async function () {
+  const userName = 'random@7edge.com';
+  const userNameInput = await driver.wait(until.elementLocated(By.id('userName')));
+  await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+  await userNameInput.sendKeys(userName);
 });

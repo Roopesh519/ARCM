@@ -5,9 +5,9 @@ Feature: Login to ARCM
     # Unhappy Paths
     Scenario Outline: Login with invalid or empty details
         Given I am on the login page
-        And I enter my username as "<username>"
+        When I enter my username as "<username>"
         And I enter my password as "<password>"
-        Then I click on the "Login" button
+        And I click on the "Login" button
         Then I should see a message "<message>"
 
         Examples:
@@ -33,28 +33,27 @@ Feature: Login to ARCM
 
 
     # forgot password start 
-    # step def pending
     Scenario: I forgot the password
         Given I am on the login page   
         When I click on the "Forgot password" button  # added button |  done
-        Then I must navigate to Forgot Password page  # do
+        Then I must navigate to Forgot Password page   # done
 
 
     Scenario: I try to request for reset link with disabled button
-        Given I am on the forgot password page     # do
-        Then the Request Reset Link button is disabled   # do
+        Given I am on the forgot password page     # done
+        Then the Request Reset Link button is disabled   # done
 
 
     Scenario: I request for reset link with wrong username
         Given I am on the forgot password page
-        When I enter wrong username   # do
+        When I enter wrong username   # done
         And I click on the "Request Reset Link" button # added button |  done
         Then I see a message "Invalid username"
 
 
     Scenario: I request for reset link with correct username
         Given I am on the forgot password page
-        When I enter username "roopesh.yadava@7edge.com"  # do
+        When I enter my username as "roopesh.yadava@7edge.com"  # done
         And I click on the "Request Reset Link" button # added button |  done
         Then I see a message "Password reset link has been sent to your registered email address"
 
