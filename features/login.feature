@@ -88,7 +88,7 @@ Feature: Login to ARCM
         And I select my Preference
         And I click on the "send" button
         Then I see otp verification page
-        When I click the button with text "Back to Login" # donee
+        When I click the button with text "Back to Login" # done
         Then I navigate to login page # done
 
 
