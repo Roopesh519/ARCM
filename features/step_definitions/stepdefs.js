@@ -47,12 +47,18 @@ When('I click on the {string} button', async function (button) {
       case 'No, I dont':
           buttonElement = await this.driver.wait(until.elementLocated(By.id('cancel')));
           break;
-      
+      case 'Cancel':
+          buttonElement = await this.driver.wait(until.elementLocated(By.id('Cancel')));        
       default:
           console.log('Invalid button string');
           return; 
   }
   await buttonElement.click();
+});
+
+
+Then('I navigate to login page', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Login")]')));
 });
 
 
@@ -106,8 +112,8 @@ Then('I should see a message {string}', async function (message) {
 });
 
 
-Then('the button with id {string} should be disabled', async function (buttonId) {
-  const button = await driver.findElement(By.id(buttonId));
+Then('I see Verify OTP button disabled', async function () {
+  const button = await driver.findElement(By.id('otp-form'));
   const isDisabled = await button.getAttribute('disabled');
   assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
 });

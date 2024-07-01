@@ -28,8 +28,8 @@ Feature: Login to ARCM
         Then I should see a a dialog box to select preference for otp verification 
         When I click on "Select Preference" button
         And I select my Preference
-        When I click on "Cancel" button # add button
-        Then I am still on the login page # step defintion
+        When I click on "Cancel" button # done
+        Then I navigate to login page # done
 
 
     Scenario: Login with empty otp
@@ -42,7 +42,7 @@ Feature: Login to ARCM
         And I select my Preference
         And I click on "send" button
         Then I see otp verification page
-        And I see Verify OTP button disabled  # step defintion
+        And I see Verify OTP button disabled  # done
 
 
     Scenario: Return to login from OTP Verification
@@ -55,7 +55,7 @@ Feature: Login to ARCM
         And I select my Preference
         And I click on "send" button
         Then I see otp verification page
-        When I click the button with text "Back to Login" # step definition
+        When I click the button with text "Back to Login" # done
         Then I navigate to login page # step definition
 
 
