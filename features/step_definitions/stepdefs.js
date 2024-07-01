@@ -29,7 +29,6 @@ When('I enter my password as {string}', async function (password) {
 
 
 // Click on the specified button
-
 When('I click on the {string} button', async function (button) {
   let buttonElement;
   switch(button) {
@@ -67,7 +66,7 @@ When('I select my Preference', async function () {
 });
 
 
-When('I navigate to otp verification page', async function () {
+Then('I see otp verification page', async function () {
   const window = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "OTP Verification")]')));
 });
 
