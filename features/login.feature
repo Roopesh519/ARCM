@@ -6,9 +6,9 @@ Feature: Login to ARCM
     Scenario Outline: Login with invalid or empty details
         Given I am on the login page
         And I enter my username as "<username>"
-        And I enter my password as "<email>"
+        And I enter my password as "<password>"
         Then I click on the "Login" button
-        Then my details should be validated with "<message>"
+        Then I should see a message "<message>"
 
         Examples:
 
@@ -22,7 +22,7 @@ Feature: Login to ARCM
 
     Scenario: Cancel preference selection
         Given I am on the login page
-        When I enter my email as "roopesh.yadava@7edge.com"
+        When I enter my username as "roopesh.yadava@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
@@ -66,7 +66,7 @@ Feature: Login to ARCM
 
     Scenario: Login with empty otp
         Given I am on the login page
-        When I enter my email as "roopesh.yadava@7edge.com"
+        When I enter my username as "roopesh.yadava@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
@@ -79,7 +79,7 @@ Feature: Login to ARCM
 
     Scenario: Return to login from OTP Verification
         Given I am on the login page
-        When I enter my email as "roopesh.yadava@7edge.com"
+        When I enter my username as "roopesh.yadava@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
@@ -93,7 +93,7 @@ Feature: Login to ARCM
 
     Scenario: Login with invalid otp
         Given I am on the login page
-        When I enter my email as "roopesh.yadava@7edge.com"
+        When I enter my username as "roopesh.yadava@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
@@ -107,7 +107,7 @@ Feature: Login to ARCM
 
     Scenario: Resend OTP
         Given I am on the login page
-        When I enter my email as "roopesh.yadava@7edge.com"
+        When I enter my username as "roopesh.yadava@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 
@@ -122,7 +122,7 @@ Feature: Login to ARCM
     # Happy paths
     Scenario: Login with valid credentials
         Given I am on the login page
-        When I enter my email as "roopesh.yadava@7edge.com"
+        When I enter my username as "roopesh.yadava@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
         Then I should see a a dialog box to select preference for otp verification 

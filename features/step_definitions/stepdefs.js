@@ -12,8 +12,8 @@ Given('I am on the login page', async function () {
 });
 
 
-// Enter email
-When('I enter my email as {string}', async function (email) {
+// Enter username
+When('I enter my username as {string}', async function (email) {
   const emailInput = await driver.wait(until.elementLocated(By.id('userName')));
   await emailInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
   await emailInput.sendKeys(email);
