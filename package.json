@@ -13,5 +13,8 @@
     "@cucumber/cucumber": "^10.8.0",
     "@faker-js/faker": "^8.4.1",
     "selenium-webdriver": "^4.22.0"
+  },
+  "dependencies": {
+    "chromedriver": "^126.0.4"
   }
 }
