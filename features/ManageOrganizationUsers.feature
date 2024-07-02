@@ -24,4 +24,35 @@ Feature: Manage Organization Users
         | Mobile Number    | 
         | Actions          | 
         And The table should display a list of Organization Users
-        And I should see a total number of records displayed at the bottom
+        And I should see a total number of records displayed at the bottom  # said to remove
+    # SORT OPERATIONS
+    Scenario: Perform Sort Operation for ID
+        Given I am on the Manage Organization Users page
+        When I click on "ID" button
+        Then The ID column must be in ascending order
+        When I click on "ID" button
+        Then The Id column must be in descending order
+
+      Scenario: Perform Sort Operation for Username
+        Given I am on the Manage Organization Users page
+        When I click on "Username" button
+        Then The ID column must be in ascending order
+        When I click on "Username" button
+        Then The Id column must be in descending order
+      
+      Scenario: Perform Sort Operation for First Name
+        Given I am on the Manage Organization Users page
+        When I click on "First Name" button
+        Then The ID column must be in ascending order
+        When I click on "First Name" button
+        Then The Id column must be in descending order
+
+      Scenario: Perform Sort Operation Status
+        Given I am on the Manage Organization Users page
+        When I click on "Status" button
+        Then The ID column must be in ascending order
+        When I click on "Status" button
+        Then The Id column must be in descending order
+
+    #SEARCH
+    

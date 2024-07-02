@@ -76,7 +76,7 @@ Then('I navigate to login page', async function () {
 });
 
 
-Then('I should see a a dialog box to select preference for otp verification ', async function () {
+Then('I should see a dialog box to select preference for otp verification ', async function () {
   const dialog = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Verify your Identity")]')));
 });
 
@@ -161,4 +161,40 @@ When('I enter wrong username', async function () {
   const userNameInput = await driver.wait(until.elementLocated(By.id('userName')));
   await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
   await userNameInput.sendKeys(userName);
+});
+//--
+
+
+
+Then('I should see a dialog box to select preference for otp verification', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Verify your Identity")]')));
+});
+
+Then('I see a message {string}', async function (message) {
+  const messageElement = await this.driver.wait(until.elementLocated(By.xpath(`//*[contains(text(), "${message}")]`)));
+  assert(messageElement !== null);
+});
+
+Then('I see Verify OTP button disabled', async function () {
+  const button = await this.driver.wait(until.elementLocated(By.id('verify_otp')));
+  const isDisabled = await button.getAttribute('disabled');
+  assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
+});
+
+When('I click the button with text {string}', async function (buttonText) {
+  const button = await this.driver.wait(until.elementLocated(By.xpath(`//button[span[text()='${buttonText}']]`)));
+  await button.click();
+});
+
+When('I enter otp as {string}', async function (otp) {
+  const otpDigits = otp.split('');
+  for (let i = 0; i < otpDigits.length; i++) {
+    const otpInput = await this.driver.wait(until.elementLocated(By.id(i.toString())));
+    await otpInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await otpInput.sendKeys(otpDigits[i]);
+  }
+});
+
+Then('I must navigate to Forgot Password page', async function () {
+  await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Forgot Password")]')));
 });

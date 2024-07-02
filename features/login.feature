@@ -22,81 +22,81 @@ Feature: Login to ARCM
 
     Scenario: Cancel preference selection
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as "rahul.mallya@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
-        Then I should see a a dialog box to select preference for otp verification 
+        Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
         And I select my Preference
-        When I click on the "Cancel" button # done
-        Then I navigate to login page # done
+        When I click on the "Cancel" button 
+        Then I navigate to login page 
 
 
     # forgot password start 
     Scenario: I forgot the password
         Given I am on the login page   
-        When I click on the "Forgot password" button  # added button |  done
-        Then I must navigate to Forgot Password page   # done
+        When I click on the "Forgot password" button  
+        Then I must navigate to Forgot Password page   
 
 
     Scenario: I try to request for reset link with disabled button
-        Given I am on the forgot password page     # done
-        Then the Request Reset Link button is disabled   # done
+        Given I am on the forgot password page     
+        Then the Request Reset Link button is disabled 
 
 
     Scenario: I request for reset link with wrong username
         Given I am on the forgot password page
-        When I enter wrong username   # done
-        And I click on the "Request Reset Link" button # added button |  done
+        When I enter wrong username   
+        And I click on the "Request Reset Link" button 
         Then I see a message "Invalid username"
 
 
     Scenario: I request for reset link with correct username
         Given I am on the forgot password page
-        When I enter my username as "roopesh.yadava@7edge.com"  # done
-        And I click on the "Request Reset Link" button # added button |  done
+        When I enter my username as "rahul.mallya@7edge.com"  
+        And I click on the "Request Reset Link" button 
         Then I see a message "Password reset link has been sent to your registered email address"
 
 
     Scenario: I request for reset link and go back to login
         Given I am on the forgot password page
-        When I click on the "Back to Login" button # added button |  done
+        When I click on the "Back to Login" button 
         Then I navigate to login page 
     # forgot password end
 
     Scenario: Login with empty otp
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as "rahul.mallya@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
-        Then I should see a a dialog box to select preference for otp verification 
+        Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
         And I select my Preference
         And I click on the "send" button
         Then I see otp verification page
-        And I see Verify OTP button disabled  # done
+        And I see Verify OTP button disabled  
 
 
     Scenario: Return to login from OTP Verification
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as "rahul.mallya@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
-        Then I should see a a dialog box to select preference for otp verification 
+        Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
         And I select my Preference
         And I click on the "send" button
         Then I see otp verification page
-        When I click the button with text "Back to Login" # done
-        Then I navigate to login page # done
+        When I click the button with text "Back to Login" 
+        Then I navigate to login page 
 
 
     Scenario: Login with invalid otp
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as "rahul.mallya@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
-        Then I should see a a dialog box to select preference for otp verification 
+        Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
         And I select my Preference
         And I click on the "send" button
@@ -107,10 +107,10 @@ Feature: Login to ARCM
 
     Scenario: Resend OTP
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as "rahul.mallya@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
-        Then I should see a a dialog box to select preference for otp verification 
+        Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
         And I select my Preference
         And I click on the "send" button
@@ -122,10 +122,10 @@ Feature: Login to ARCM
     # Happy paths
     Scenario: Login with valid credentials
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as "rahul.mallya@7edge.com"
         And I enter my password as "Admin@123"
         And I click on the "login" button
-        Then I should see a a dialog box to select preference for otp verification 
+        Then I should see a dialog box to select preference for otp verification
         When I click on the "Select Preference" button
         And I select my Preference
         And I click on the "send" button
