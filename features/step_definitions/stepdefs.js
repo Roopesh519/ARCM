@@ -1,8 +1,19 @@
 const assert = require('assert'); 
-const { Before, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
+const { Before, After, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
 const { By, Key, Builder, until, Select} = require('selenium-webdriver')
 const { faker } = require('@faker-js/faker');
 
+setDefaultTimeout(60 * 1000);
+
+let driver;
+
+Before(async function () {
+    driver = await new Builder().forBrowser('MicrosoftEdge').build();
+});
+
+After(async function () {
+    await driver.quit();
+});
 
 // Navigate to the login page
 Given('I am on the login page', async function () {

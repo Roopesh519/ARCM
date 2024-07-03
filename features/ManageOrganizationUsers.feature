@@ -3,6 +3,30 @@ Feature: Manage Organization Users
     I want to view the list of Organization Users
     So that I can manage them effectively
 
+#UNHAPPY PATH
+    Scenario Outline: Invalid Search with ID,First Name,Email
+        Given I am on the Manage Organization Users page
+        When I click on "Search" bar                                 
+        And  I enter text as "<details>"
+        Then I should see a message "<message>"       
+
+        Examples:
+        |details                 |message                                               |
+        |ORG000000000            |No exact matches found. Please try a different search |
+        |unkown@7edge.com        |No exact matches found. Please try a different search |
+        |unkown                  |No exact matches found. Please try a different search |
+
+
+
+
+
+
+
+
+
+
+
+#HAPPY PATH
     Scenario: Navigate to Manage Organization Users
         Given I am on the profile page
         When I click on "Manage Organization Users" button
@@ -39,8 +63,8 @@ Feature: Manage Organization Users
         |Username    |
         |First Name  |
         |Status      |
+   
     # SEARCH
-
     Scenario Outline: Search with ID,First Name,Email
         Given I am on the Manage Organization Users page
         When I click on "Search" bar                                 
@@ -51,5 +75,19 @@ Feature: Manage Organization Users
         |ORG000005618            |
         |roopesh.yadava@7edge.com|
         |Roopesh                 |
+    
+    #EXPORT 
+    Scenario: Performing Export
+        Given I am on the Manage Organization Users page
+        When I click on "icon-export" button
+        Then I should see a Popup Box "Select columns to export"
+        When I click on "Export" button
+        Then I should see a message "Organization user list exported successfully"
+
+    #PAGE
+
+
+
+
 
 
