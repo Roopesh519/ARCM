@@ -236,3 +236,24 @@ Then('I should see a message {string}', async function (message) {
         assert.ok(check, 'passed');
       }
   });
+
+  //Search  
+When('I click on the "Search" bar', async function () {
+    this.searchBar = await this.driver.findElement(By.id('search-value'));
+    await this.searchBar.click();
+});
+
+When('I enter text as {string}', async function (details) {
+    if (!this.searchBar) {
+        this.searchBar = await this.driver.findElement(By.id('search-value'));
+    }
+    await this.searchBar.sendKeys(details);
+});
+
+Then('I should see the search detail {string}', async function (details) {
+    const searchResult = await driver.findElement(By.xpath(`//*[contains(text(), '${details}')]`));
+    const text = await searchResult.getText();
+    if (text !== details) {
+        throw new Error(`Expected to see text "${details}", but saw "${text}"`);
+    }
+});

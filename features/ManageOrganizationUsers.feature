@@ -59,7 +59,7 @@ Feature: Manage Organization Users
         Given I am on the Manage Organization Users page
         When I click on "Search" bar                                 
         And  I enter text as "<details>"
-        Then I should see the search detail
+        Then I should see the search detail "<details>"
 
         Examples:
         |ORG000005618            |
