@@ -27,48 +27,29 @@ Feature: Manage Organization Users
         And I should see a total number of records displayed at the bottom  # said to remove
     
     # SORT OPERATIONS
-    Scenario: Perform Sort Operation for ID
+    Scenario Outline: Perform Sort Operation for ID
         Given I am on the Manage Organization Users page
-        When I click on "ID" button
-        Then The ID column must be in ascending order
-        When I click on "ID" button
-        Then The Id column must be in descending order
+        When I click on "<Button>" button
+        Then The "<Button>" column must be in ascending order
+        When I click on "<Button>" button
+        Then The "<Button>" column must be in descending order
 
-    Scenario: Perform Sort Operation for Username
-        Given I am on the Manage Organization Users page
-        When I click on "Username" button
-        Then The ID column must be in ascending order
-        When I click on "Username" button
-        Then The Id column must be in descending order
-      
-    Scenario: Perform Sort Operation for First Name
-        Given I am on the Manage Organization Users page
-        When I click on "First Name" button
-        Then The ID column must be in ascending order
-        When I click on "First Name" button
-        Then The Id column must be in descending order
-
-    Scenario: Perform Sort Operation Status
-        Given I am on the Manage Organization Users page
-        When I click on "Status" button
-        Then The ID column must be in ascending order
-        When I click on "Status" button
-        Then The Id column must be in descending order
-
+          Examples:
+        |ID          |
+        |Username    |
+        |First Name  |
+        |Status      |
     # SEARCH
 
-    Scenario: Search with ID
+    Scenario Outline: Search with ID,First Name,Email
         Given I am on the Manage Organization Users page
-        When I click on "Search" bar                                 # should i make it button?
-        And  I enter text as "ORG000005618"
+        When I click on "Search" bar                                 
+        And  I enter text as "<details>"
         Then I should see the search detail
 
-    Scenario: Search with Username
-        Given I am on the Manage Organization Users page
-        When I click on "Search" bar                                 # should i make it button?
-        And  I enter text as "ORG000005618"
-        Then I should see the search detail
-    Scenario: Search with First Name
-        
-    Scenario: Search with Email Address
+        Examples:
+        |ORG000005618            |
+        |roopesh.yadava@7edge.com|
+        |Roopesh                 |
+
 
