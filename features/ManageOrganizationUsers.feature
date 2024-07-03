@@ -16,7 +16,7 @@ Feature: Manage Organization Users
         |unkown@7edge.com        |No exact matches found. Please try a different search |
         |unkown                  |No exact matches found. Please try a different search |
 
-#HAPPY PATH
+#HAPPY PATH Done
     Scenario: Navigate to Manage Organization Users
         Given I am on the profile page
         When I click on "Manage Organization Users" button
@@ -40,7 +40,7 @@ Feature: Manage Organization Users
         And The table should display a list of Organization Users
        
     
-    # SORT OPERATIONS
+    # SORT OPERATIONS  Done
     Scenario Outline: Perform Sort Operation for ID
         Given I am on the Manage Organization Users page
         When I click on "<Button>" button
@@ -66,15 +66,15 @@ Feature: Manage Organization Users
         |roopesh.yadava@7edge.com|
         |Roopesh                 |
     
-    #EXPORT 
+    #EXPORT Done
     Scenario: Performing Export
         Given I am on the Manage Organization Users page
         When I click on "icon-export" button
-        Then I should see a Popup Box "Select columns to export"
+        Then I should see a Popup box "Select columns to export"
         When I click on "Export" button
         Then I should see a message "Organization user list exported successfully"
 
-    #PAGE
+    #PAGE Done
     Scenario: Perform pagination and verify navigation
         Given I am on the Manage Organization Users page
         When I check for the pagination element

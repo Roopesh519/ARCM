@@ -190,3 +190,49 @@ Then('I perform pagination if the element exists and verify navigation', async f
         console.log('Pagination element does not exist, skipping pagination...');
     }
 });
+
+When('I click on the {string} button', async function (button) {
+    let buttonElement;
+    switch(button) {
+        case 'icon-export':
+            buttonElement = await this.driver.wait(until.elementLocated(By.id('icon-export')));
+            break;
+        case 'Export':
+            buttonElement = await this.driver.wait(until.elementLocated(By.id('Export')));
+            break;
+            
+        default:
+            console.log('Invalid button string');
+            return; 
+    }
+    await buttonElement.click();
+  });
+
+  Then('I should see a Popup box "Select columns to export"', async function () {
+    const messageXPath = '//*[contains(text(), "Select columns to export")]';
+    const messageElement = await this.driver.wait(until.elementLocated(By.xpath(messageXPath)), 10000);
+    const messageText = await messageElement.getText();
+    if (messageText !== "Select columns to export") {
+        throw new Error('Message "Select columns to export" not found');
+    }
+});
+
+// Verify message text
+Then('I should see a message {string}', async function (message) {
+  for (let loop = 100; loop > 0; loop--) {
+      await driver.manage().setTimeouts({ pageLoad: 300 });
+      let pageSource = await driver.getPageSource();
+      let check = pageSource.includes(message); 
+      assert.ok(check, 'passed');
+    }
+});
+
+// Verify message text
+Then('I should see a message {string}', async function (message) {
+    for (let loop = 100; loop > 0; loop--) {
+        await driver.manage().setTimeouts({ pageLoad: 300 });
+        let pageSource = await driver.getPageSource();
+        let check = pageSource.includes(message); 
+        assert.ok(check, 'passed');
+      }
+  });
