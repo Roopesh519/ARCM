@@ -8,7 +8,9 @@ let driver;
 
 BeforeAll(async function () {
     driver = await new Builder().forBrowser('chrome').build();
+    global.driver = driver;
 });
+
 
 AfterAll(async function () {
     await driver.sleep(5000);
