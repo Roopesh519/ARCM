@@ -4,7 +4,7 @@ const { By, Key, Builder, until } = require('selenium-webdriver');
 const edge = require('selenium-webdriver/edge');
 
 // Specify the path to the Edge WebDriver executable
-const edgeDriverPath = '/usr/bin/msedgedriver.exe';
+const edgeDriverPath = '/usr/local/bin/msedgedriver';
 let driver;
 
 Before(async function () {
