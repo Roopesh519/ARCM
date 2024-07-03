@@ -20,7 +20,7 @@ Feature: Manage Organization Users
     Scenario: Navigate to Manage Organization Users
         Given I am on the profile page
         When I click on "Manage Organization Users" button
-        Then I navigate to Manage Organization Users page
+        Then I am on the Manage Organization Users page
 
     Scenario: Display list of Organization Users
         Given I am on the Manage Organization Users page
@@ -78,8 +78,7 @@ Feature: Manage Organization Users
     Scenario: Perform pagination and verify navigation
         Given I am on the Manage Organization Users page
         When I check for the pagination element
-        Then I perform pagination if the element exists
-        And I verify that I have navigated to the next page
+        Then I perform pagination if the element exists and verify navigation
 
 
 

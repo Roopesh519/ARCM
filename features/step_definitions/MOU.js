@@ -28,7 +28,7 @@ When('I click on {string} button', async function(button) {
 });
 
 
-When('I navigate to Manage Organization Users page', async function () {
+When('I am on the Manage Organization Users page', async function () {
     await this.driver.wait(until.urlContains('manage-organization-users'));
     await this.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')));
     await this.driver.wait(until.elementLocated(By.css('table.table-auto')), 5000); // Adjust as necessary
@@ -59,3 +59,134 @@ Then('The table should display a list of Organization Users', async function () 
 //     const totalRecordsText = await totalRecordsElement.getText();
 //     expect(totalRecordsText).to.match(/Total Number of Records:\d+/);
 // });
+
+//SORT
+When('I click on {string} button', async function(button) {
+    let buttonId;
+    switch (button) {
+        case 'ID':
+            buttonId = 'id';
+            break;
+        case 'Username':
+            buttonId = 'username';
+            break;
+        case 'First Name':
+            buttonId = 'first';
+            break;
+        case 'Status':
+            buttonId = 'status';
+            break;
+        default:
+            throw new Error(`Unknown button: ${button}`);
+    }
+    const buttonElement = await driver.findElement(By.id(buttonId));
+    await buttonElement.click();
+    this.extractedData = []; // Initialize extracted data array
+
+    do {
+        // Extract table data
+        let rows = await driver.findElements(By.xpath('//table/tbody/tr'));
+        for (let row of rows) {
+            let cells = await row.findElements(By.xpath('td'));
+            let rowData = {
+                ID: await cells[0].getText(),
+                Username: await cells[1].getText(),
+                FirstName: await cells[2].getText(),
+                Status: await cells[5].getText()  // Adjust index based on your table structure
+            };
+            this.extractedData.push(rowData);
+        }
+
+        // Find and click the next page button
+        let nextPageButton = await driver.findElement(By.xpath('//button[@class="px-1 py-0.5 border-2 border-[#687182] rounded-md"]'));
+        await nextPageButton.click();
+        await driver.wait(until.stalenessOf(nextPageButton), 10000);
+
+        // Add a delay to allow the next page to load fully (optional, adjust as needed)
+        await driver.sleep(2000);  // Wait for 2 seconds
+
+        // Check if there are more pages to process
+        let isNextPageAvailable = await isElementPresent(driver, By.xpath('//button[@class="px-1 py-0.5 border-2 border-[#687182] rounded-md"]'));
+        if (!isNextPageAvailable) {
+            break;
+        }
+    } while (true);
+});
+
+async function isElementPresent(driver, locator) {
+    try {
+        await driver.findElement(locator);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+Then('The {string} column must be in ascending order', async function(button) {
+    const column = mapButtonToColumn(button);
+    let extractedColumnValues = this.extractedData.map(row => row[column]);
+
+    // Check if the extracted data is in ascending order
+    let manuallySortedValues = [...extractedColumnValues].sort();
+    assert.deepStrictEqual(extractedColumnValues, manuallySortedValues, `The ${button} column is not in ascending order`);
+});
+
+Then('The {string} column must be in descending order', async function(button) {
+    const column = mapButtonToColumn(button);
+    let extractedColumnValues = this.extractedData.map(row => row[column]);
+
+    // Check if the extracted data is in descending order
+    let manuallySortedValues = [...extractedColumnValues].sort().reverse();
+    assert.deepStrictEqual(extractedColumnValues, manuallySortedValues, `The ${button} column is not in descending order`);
+});
+
+function mapButtonToColumn(button) {
+    switch (button) {
+        case 'ID':
+            return 'ID';
+        case 'Username':
+            return 'Username';
+        case 'First Name':
+            return 'FirstName';
+        case 'Status':
+            return 'Status';
+        default:
+            throw new Error(`Unknown column: ${button}`);
+    }
+}
+
+//PAGE
+When('I check for the pagination element', async function() {
+    this.paginationExists = await driver.executeScript(function() {
+        return document.querySelector('#rows_per_page') !== null;
+    });
+});
+
+Then('I perform pagination if the element exists and verify navigation', async function() {
+    if (this.paginationExists) {
+        console.log('Pagination element exists, performing pagination...');
+
+        // Locate and click the button to go to the next page
+        const nextButton = await driver.findElement(By.className('px-1 py-0.5 border-2 border-[#687182] rounded-md'));
+        const prevPageNumberElement = await driver.findElement(By.css('.current-page'));
+        const prevPageNumber = await prevPageNumberElement.getText();
+        const nextPageNumber = parseInt(prevPageNumber) + 1;
+
+        await nextButton.click();
+
+        // Wait for the next page to load (adjust as necessary)
+        await driver.sleep(1000);
+
+        // Verify that the navigation to the next page was successful
+        const currentPageNumberElement = await driver.findElement(By.css('.current-page'));
+        const currentPageNumber = await currentPageNumberElement.getText();
+
+        if (parseInt(currentPageNumber) === nextPageNumber) {
+            console.log(`Successfully navigated to page ${nextPageNumber}`);
+        } else {
+            throw new Error('Failed to navigate to the next page');
+        }
+    } else {
+        console.log('Pagination element does not exist, skipping pagination...');
+    }
+});
