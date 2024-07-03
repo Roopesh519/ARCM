@@ -14,18 +14,7 @@ Given('I am on the profile page', async function () {
 });
 
 
-When('I click on {string} button', async function(button) {
-    let buttonElement;
-    switch(button) {
-        case 'Manage Organization Users':
-            buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Manage Organization Users")]')));
-            break;
-        default:
-            console.log('Invalid button string');
-            return; 
-    }
-    await buttonElement.click();
-});
+
 
 
 When('I am on the Manage Organization Users page', async function () {
@@ -75,6 +64,9 @@ When('I click on {string} button', async function(button) {
             break;
         case 'Status':
             buttonId = 'status';
+            break;
+        case 'Manage Organization Users':
+            buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Manage Organization Users")]')));
             break;
         default:
             throw new Error(`Unknown button: ${button}`);
@@ -217,15 +209,6 @@ When('I click on the {string} button', async function (button) {
     }
 });
 
-// Verify message text
-Then('I should see a message {string}', async function (message) {
-  for (let loop = 100; loop > 0; loop--) {
-      await driver.manage().setTimeouts({ pageLoad: 300 });
-      let pageSource = await driver.getPageSource();
-      let check = pageSource.includes(message); 
-      assert.ok(check, 'passed');
-    }
-});
 
 // Verify message text
 Then('I should see a message {string}', async function (message) {
@@ -238,10 +221,11 @@ Then('I should see a message {string}', async function (message) {
   });
 
   //Search  
-When('I click on the "Search" bar', async function () {
-    this.searchBar = await this.driver.findElement(By.id('search-value'));
-    await this.searchBar.click();
+  When('I click on {string} bar', async function (elementText) {
+    const elementXPath = `//*[contains(text(), '${elementText}')]`;
+    await this.driver.findElement(By.xpath(elementXPath)).click();
 });
+
 
 When('I enter text as {string}', async function (details) {
     if (!this.searchBar) {

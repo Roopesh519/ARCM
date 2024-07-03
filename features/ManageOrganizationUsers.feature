@@ -6,7 +6,8 @@ Feature: Manage Organization Users
 #UNHAPPY PATH
     Scenario Outline: Invalid Search with ID,First Name,Email
         Given I am on the Manage Organization Users page
-        When I click on "Search" bar                                 
+        When I click on "Search" bar
+                                
         And  I enter text as "<details>"
         Then I should see a message "<message>"       
 
