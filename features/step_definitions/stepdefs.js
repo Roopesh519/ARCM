@@ -1,161 +1,175 @@
-const assert = require('assert'); 
-const { Before, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
+const assert = require('assert');
+const { BeforeAll, AfterAll, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
 const { By, Key, Builder, until } = require('selenium-webdriver');
-const edge = require('selenium-webdriver/edge');
 
-// Specify the path to the Edge WebDriver executable
-const edgeDriverPath = '/usr/local/bin/msedgedriver';
+setDefaultTimeout(60 * 1000);
+
 let driver;
 
-Before(async function () {
-  driver = await new Builder()
-    .forBrowser('msedge') // Use 'msedge' for Microsoft Edge
-    .setEdgeService(new edge.ServiceBuilder(edgeDriverPath))
-    .build();
+BeforeAll(async function () {
+    driver = await new Builder().forBrowser('chrome').build();
 });
 
-// After(async function() {
-//   await driver.quit();
-// });
+AfterAll(async function () {
+    await driver.sleep(5000);
+    await driver.quit();
+});
 
-// Navigate to the login page
 Given('I am on the login page', async function () {
-  await driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/');
-  await new Promise(resolve => setTimeout(resolve, 500));
-  await driver.wait(until.elementLocated(By.xpath('//*[text()="Login"]')));
+    await driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/');
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await driver.wait(until.elementLocated(By.xpath('//*[text()="Login"]')));
 });
 
-// Enter username
+
 When('I enter my username as {string}', async function (email) {
-  const emailInput = await driver.wait(until.elementLocated(By.id('userName')));
-  await emailInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
-  await emailInput.sendKeys(email);
+    const emailInput = await driver.wait(until.elementLocated(By.id('userName')));
+    await emailInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await emailInput.sendKeys(email);
 });
 
-// Enter password
 When('I enter my password as {string}', async function (password) {
-  const passwordInput = await driver.wait(until.elementLocated(By.id('passWord')));
-  await passwordInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
-  await passwordInput.sendKeys(password);
+    const passwordInput = await driver.wait(until.elementLocated(By.id('passWord')));
+    await passwordInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await passwordInput.sendKeys(password);
 });
 
-// Click on the specified button
 When('I click on the {string} button', async function (button) {
-  let buttonElement;
-  switch(button) {
-      case 'login':
-          buttonElement = await driver.wait(until.elementLocated(By.id('login')));
-          break;
-      case 'Select Preference':
-          buttonElement = await driver.wait(until.elementLocated(By.css('[data-testid="select-device-btn"]')));
-          break;
-      case 'send':
-          buttonElement = await driver.wait(until.elementLocated(By.id('add_admin')));
-          break;
-      case 'verify otp':
-          buttonElement = await driver.wait(until.elementLocated(By.id('otp-form')));
-          break;
-      case 'No, I dont':
-          buttonElement = await driver.wait(until.elementLocated(By.id('cancel')));
-          break;
-      case 'Cancel':
-          buttonElement = await driver.wait(until.elementLocated(By.id('Cancel')));        
-          break;
-      case 'Resend OTP':
-          buttonElement = await driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Resend OTP")]')));        
-          break;  
-      case 'Forgot password':
-          buttonElement = await driver.wait(until.elementLocated(By.id('forgot')));        
-          break; 
-      case 'Request Reset Link':
-          buttonElement = await driver.wait(until.elementLocated(By.id('reset_link')));        
-          break;
-      case 'Back to Login':
-          buttonElement = await driver.wait(until.elementLocated(By.xpath('//*[(contains(text(), "Back to Login")]')));        
-          break;
-          
-      default:
-          console.log('Invalid button string');
-          return; 
-  }
-  await buttonElement.click();
+    let buttonElement;
+    switch (button) {
+        case 'login':
+            buttonElement = await driver.wait(until.elementLocated(By.id('login')));
+            break;
+        case 'Select Preference':
+            buttonElement = await driver.wait(until.elementLocated(By.css('[data-testid="select-device-btn"]')));
+            break;
+        case 'send':
+            buttonElement = await driver.wait(until.elementLocated(By.id('add_admin')));
+            break;
+        case 'verify otp':
+            buttonElement = await driver.wait(until.elementLocated(By.id('otp-form')));
+            break;
+        case "No, I Don't":
+            buttonElement = await driver.wait(until.elementLocated(By.id('Cancel')));
+            break;
+        case 'Cancel':
+            buttonElement = await driver.wait(until.elementLocated(By.id('Cancel')));
+            break;
+        case 'Resend OTP':
+            await driver.sleep(11000);
+            buttonElement = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Resend OTP")]')));
+            break;
+        case 'Forgot password':
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            buttonElement = await driver.wait(until.elementLocated(By.id('forgot')));
+            break;
+        case 'Request Reset Link':
+            buttonElement = await driver.wait(until.elementLocated(By.id('reset_link')));
+            break;
+        case 'Back to Login':
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            buttonElement = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Back to Login")]')));
+            break;
+        default:
+            console.log('Invalid button string');
+            return;
+    }
+    await buttonElement.click();
 });
 
-Then('I navigate to login page', async function () {
-  await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Login")]')));
-});
-
-Then('I should see a a dialog box to select preference for otp verification', async function () {
-  const dialog = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Verify your Identity")]')));
+Then('I should see a dialog box to select preference for otp verification', async function () {
+    const dialog = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Verify your Identity")]')));
+    assert(dialog !== null);
 });
 
 When('I select my Preference', async function () {
-  const selectElement = await driver.wait(until.elementLocated(By.css('[data-testid="device_template"]'))).click();
+    const selectElement = await driver.wait(until.elementLocated(By.css('[data-testid="device_template"]')));
+    await selectElement.click();
 });
 
 Then('I see otp verification page', async function () {
-  const window = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "OTP Verification")]')));
+    const window = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "OTP Verification")]')));
+    assert(window !== null);
 });
 
 When('I enter otp as {string}', async function (otp) {
-  const otpDigits = otp.split('');
-  for (let i = 0; i < otpDigits.length; i++) {
-    const otpInput = await driver.wait(until.elementLocated(By.id(i.toString())));
-    await otpInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
-    await otpInput.sendKeys(otpDigits[i]);
-  }
-});
-
-Then('I see a message Do you want to trust this browser', async function () {
-  const trustMessage = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Do you want to trust this browser")]')));
-  assert(trustMessage !== null);
-});
-
-// Verify navigation to profile page
-Then('I navigate to profile page', async function () {
-  await driver.wait(until.urlContains('profile'), 5000);
-  const currentUrl = await driver.getCurrentUrl();
-  expect(currentUrl).to.include('profile');
-});
-
-// Verify message text
-Then('I see a message {string}', async function (message) {
-  for (let loop = 100; loop > 0; loop--) {
-      await driver.manage().setTimeouts({ pageLoad: 300 });
-      let pageSource = await driver.getPageSource();
-      let check = pageSource.includes(message); 
-      assert.ok(check, 'passed');
+    const otpDigits = otp.split('');
+    for (let i = 0; i < otpDigits.length; i++) {
+        const otpInput = await driver.wait(until.elementLocated(By.id(i.toString())));
+        await otpInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+        await otpInput.sendKeys(otpDigits[i]);
     }
 });
 
-Then('I see Verify OTP button disabled', async function () {
-  const button = await driver.wait(until.elementLocated(By.id('otp-form')));
-  const isDisabled = await button.getAttribute('disabled');
-  assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
+Then('I should see a message Do you want to trust this browser', async function () {
+    const trustMessage = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Do You Want to Trust This Browser?")]')));
+    assert(trustMessage !== null);
 });
 
-When('I click the button with text {string}', async function (buttonText) {
-  const button = await driver.wait(until.elementLocated(By.xpath(`//button[span[text()='${buttonText}']]`)));
-  await button.click();
+Then('I navigate to profile page', async function () {
+    await driver.wait(until.urlContains('profile'), 5000);
+    const currentUrl = await driver.getCurrentUrl();
+    assert(currentUrl.includes('profile'));
 });
 
-Then('I must navigate to Forgot Password page', async function () {
-  await driver.wait(until.elementLocated(By.xpath('[//*contains(text(), "Forgot Password"')));
+Then('I should see a message {string}', async function (message) {
+    let check = false;
+    let retries = 70;
+    
+    while (retries > 0) {
+        let pageSource = await driver.getPageSource();
+        check = pageSource.includes(message);
+    
+        if (check) {
+            console.log("checked");
+            return "passed";
+        } else {
+            console.log("else block");
+            await new Promise((resolve) => setTimeout(resolve, 300));
+            retries--;
+        }
+    }
+    throw new Error("Failed");
 });
 
-Given('I am on the forgot password page', async function () {
-  await driver.wait(until.elementLocated(By.xpath('[//*contains(text(), "Forgot Password"')));
+
+Then('I navigate to login page', async function () {
+    await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Login")]')));
+  });
+
+
+  Then('I must navigate to Forgot Password page', async function () {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Forgot Password")]')));
+  });
+
+
+  Given('I am on the forgot password page', async function () {
+    await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Forgot Password")]')));
+  });
+
+
+  Then('The Request Reset Link button is disabled', async function() {
+    const button = await driver.wait(until.elementLocated(By.id('reset_link')));
+    const isDisabled = await button.getAttribute('disabled');
+    assert.strictEqual(isDisabled, 'true', 'Expected button with id reset_link to be disabled');
 });
 
-Then('the Request Reset Link button is disabled', async function(){
-  const button = await driver.wait(until.elementLocated(By.id('reset_link')));
-  const isDisabled = await button.getAttribute('disabled');
-  assert.strictEqual(isDisabled, 'true', `Expected button with id ${buttonId} to be disabled`);
-});
+  
 
-When('I enter wrong username', async function () {
-  const userName = 'random@7edge.com';
-  const userNameInput = await driver.wait(until.elementLocated(By.id('userName')));
-  await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
-  await userNameInput.sendKeys(userName);
-});
+  When('I enter wrong username', async function () {
+    const userName = 'random@7edge.com';
+    const userNameInput = await driver.wait(until.elementLocated(By.id('userName')));
+    await userNameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await userNameInput.sendKeys(userName);
+  });
+
+
+  Then('I see Verify OTP button disabled', async function () {
+    const button = await driver.wait(until.elementLocated(By.id('otp-form')));
+    const isDisabled = await button.getAttribute('disabled');
+    assert.strictEqual(isDisabled, 'true', `Expected button with id ot-form to be disabled`);
+  });
+
+
+  // ------------------------------------------------------------------------------------------- //
