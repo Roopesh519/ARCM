@@ -16,16 +16,6 @@ Feature: Manage Organization Users
         |unkown@7edge.com        |No exact matches found. Please try a different search |
         |unkown                  |No exact matches found. Please try a different search |
 
-
-
-
-
-
-
-
-
-
-
 #HAPPY PATH
     Scenario: Navigate to Manage Organization Users
         Given I am on the profile page
@@ -48,7 +38,7 @@ Feature: Manage Organization Users
         | Mobile Number    | 
         | Actions          | 
         And The table should display a list of Organization Users
-        And I should see a total number of records displayed at the bottom  # said to remove
+       
     
     # SORT OPERATIONS
     Scenario Outline: Perform Sort Operation for ID
@@ -85,6 +75,11 @@ Feature: Manage Organization Users
         Then I should see a message "Organization user list exported successfully"
 
     #PAGE
+    Scenario: Perform pagination and verify navigation
+        Given I am on the Manage Organization Users page
+        When I check for the pagination element
+        Then I perform pagination if the element exists
+        And I verify that I have navigated to the next page
 
 
 
