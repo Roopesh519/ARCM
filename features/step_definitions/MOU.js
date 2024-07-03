@@ -250,10 +250,27 @@ When('I enter text as {string}', async function (details) {
     await this.searchBar.sendKeys(details);
 });
 
-Then('I should see the search detail {string}', async function (details) {
-    const searchResult = await driver.findElement(By.xpath(`//*[contains(text(), '${details}')]`));
-    const text = await searchResult.getText();
-    if (text !== details) {
-        throw new Error(`Expected to see text "${details}", but saw "${text}"`);
+// Then('I should see the search detail {string}', async function (details) {
+//     const searchResult = await driver.findElement(By.xpath(`//*[contains(text(), '${details}')]`));
+//     const text = await searchResult.getText();
+//     if (text !== details) {
+//         throw new Error(`Expected to see text "${details}", but saw "${text}"`);
+//     }
+// });
+
+Then('I should see the search detail {string} in the column with id {string}', async function (details, columnId) {
+    const searchResults = await driver.findElements(By.css(`th[id='${columnId}'], th[username='${columnId}'], th[first='${columnId}']`));
+
+    let found = false;
+    for (let result of searchResults) {
+        const text = await result.getText();
+        if (text.includes(details)) {
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        throw new Error(`Expected to see text "${details}", but it was not found in any of the search results with column id "${columnId}"`);
     }
 });

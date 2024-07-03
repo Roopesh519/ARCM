@@ -59,12 +59,19 @@ Feature: Manage Organization Users
         Given I am on the Manage Organization Users page
         When I click on "Search" bar                                 
         And  I enter text as "<details>"
-        Then I should see the search detail "<details>"
+        Then I should see the search detail "<details>" in the column with id "<columnId>"
 
         Examples:
-        |ORG000005618            |
-        |roopesh.yadava@7edge.com|
-        |Roopesh                 |
+        | details                    | columnId |
+        | ORG000005618               | id       |
+        | roopesh.yadava@7edge.com   | username |
+        | Roopesh                    | first    |
+
+        # Then I should see the search detail "<details>"
+        # Examples:
+        # |ORG000005618            |
+        # |roopesh.yadava@7edge.com|
+        # |Roopesh                 |
     
     #EXPORT Done
     Scenario: Performing Export
