@@ -33,6 +33,27 @@ When('I click on {string} button', async function (button) {
         case 'Filter':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('filter')));
             break;
+        case 'Add Observer':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Add user')));
+            break;
+        case 'Sub Division Name':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('sub_division_name')));
+            break;
+        case 'Subdivision':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('0subdivision')));
+            break;
+        case 'Select patient':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('patient_name')));
+            break;
+        case 'Patient':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('0patient')));
+            break;
+        case 'Yes':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('add_admin')));
+            break;
+        case 'submit':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('update')));
+            break;
         default:
             console.log('Invalid button string');
             return;
