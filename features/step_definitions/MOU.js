@@ -14,14 +14,23 @@ Given('I am on the profile page', async function () {
 });
 
 
-
-
-
 When('I am on the Manage Organization Users page', async function () {
-    await this.driver.wait(until.urlContains('manage-organization-users'));
-    await this.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')));
-    await this.driver.wait(until.elementLocated(By.css('table.table-auto')), 5000); // Adjust as necessary
+    // Navigate to the Manage Organization Users page URL
+    await this.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users?page_number=1&sort=created_at%2Bdesc&limit=15');
+
+    // Wait for the "Manage Organization Users" element to be located
+    await this.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')), 10000);
 });
+
+
+
+
+
+// When('I am on the Manage Organization Users page', async function () {
+//     await this.driver.wait(until.urlContains('manage-organization-users'));
+//     await this.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')));
+//     await this.driver.wait(until.elementLocated(By.css('table.table-auto')), 10000); // Adjust as necessary
+// });
 
 
 Then('I should see a table with the following rows:', async function (dataTable) {
@@ -183,7 +192,7 @@ Then('I perform pagination if the element exists and verify navigation', async f
     }
 });
 
-When('I click on the {string} button', async function (button) {
+When('I click on a {string} button', async function (button) {
     let buttonElement;
     switch(button) {
         case 'icon-export':
@@ -210,15 +219,15 @@ When('I click on the {string} button', async function (button) {
 });
 
 
-// Verify message text
-Then('I should see a message {string}', async function (message) {
-    for (let loop = 100; loop > 0; loop--) {
-        await driver.manage().setTimeouts({ pageLoad: 300 });
-        let pageSource = await driver.getPageSource();
-        let check = pageSource.includes(message); 
-        assert.ok(check, 'passed');
-      }
-  });
+// // Verify message text
+// Then('I should see a message {string}', async function (message) {
+//     for (let loop = 100; loop > 0; loop--) {
+//         await driver.manage().setTimeouts({ pageLoad: 300 });
+//         let pageSource = await driver.getPageSource();
+//         let check = pageSource.includes(message); 
+//         assert.ok(check, 'passed');
+//       }
+//   });
 
   //Search  
   When('I click on {string} bar', async function (elementText) {

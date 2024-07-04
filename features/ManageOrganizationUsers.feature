@@ -77,9 +77,9 @@ Feature: Manage Organization Users
     #EXPORT Done
     Scenario: Performing Export
         Given I am on the Manage Organization Users page
-        When I click on "icon-export" button
+        When I click on a "icon-export" button
         Then I should see a Popup box "Select columns to export"
-        When I click on "Export" button
+        When I click on a "Export" button
         Then I should see a message "Organization user list exported successfully"
 
     #PAGE Done
