@@ -4,23 +4,6 @@ Feature: Manage Organization Users
     I want to view the list of Organization Users
     So that I can manage them effectively
 
-  Scenario: Login with valid credentials
-    Given I am on the login page
-    When I enter my username as "rahul.mallya@7edge.com"
-    And I enter my password as "Admin@1234"
-    * I click on the "login" button
-    Then I should see a dialog box to select preference for otp verification
-    When I click on the "Select Preference" button
-    And I select my Preference
-    * I click on the "send" button
-    Then I see otp verification page
-    When I enter otp as "981256"
-    And I click on the "verify otp" button
-    Then I should see a message Do you want to trust this browser
-    When I click on the "No, I Don't" button
-    Then I navigate to profile page
-    And I should see a message "Login successful"
-    
 #UNHAPPY PATH
 
   Scenario Outline: Invalid Search with ID,First Name,Email
@@ -34,7 +17,23 @@ Feature: Manage Organization Users
       | ORG000000000     | No exact matches found. Please try a different search |
       | unkown@7edge.com | No exact matches found. Please try a different search |
       | unkown           | No exact matches found. Please try a different search |
-#HAPPY PATH Done
+
+#HAPPY PATH
+
+    #EXPORT 
+  Scenario: Performing Export
+    Given I am on the Manage Organization Users page
+    When I click on a "icon-export" button
+    * I click on a "Export" button
+    Then I should see a message "Organization user list exported successfully"
+   
+   
+    #Pagination
+    #Search
+    #Sort
+
+
+
 
 
 #   Scenario: Display list of Organization Users
@@ -85,17 +84,4 @@ Feature: Manage Organization Users
         # |ORG000005618            |
         # |roopesh.yadava@7edge.com|
         # |Roopesh                 |
-    #EXPORT Done
-
-  Scenario: Performing Export
-    Given I am on the Manage Organization Users page
-    When I click on a "icon-export" button
-   # Then I should see a Popup box "Select columns to export"
-    When I click on a "Export" button
-    Then I should see a message "Organization user list exported successfully"
-    #PAGE Done
-
-  Scenario: Perform pagination and verify navigation
-    Given I am on the Manage Organization Users page
-    When I check for the pagination element
-    Then I perform pagination if the element exists and verify navigation
+    

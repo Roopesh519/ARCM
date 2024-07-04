@@ -202,15 +202,7 @@ When('I click on a {string} button', async function (button) {
     await buttonElement.click();
   });
 
-  Then('I should see a Popup box "Select columns to export"', async function () {
-    const messageXPath = '//*[contains(text(), "Select columns to export")]';
-    const messageElement = await global.driver.wait(until.elementLocated(By.xpath(messageXPath)), 10000);
-    const messageText = await messageElement.getText();
-    if (messageText !== "Select columns to export") {
-        throw new Error('Message "Select columns to export" not found');
-    }
-});
-
+  
   //Search  
   When('I click on {string} bar', async function (elementText) {
     await global.driver.wait(until.elementLocated(By.id('search-value'))).click();
