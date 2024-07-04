@@ -16,14 +16,11 @@ Given('I am on the profile page', async function () {
 
 When('I am on the Manage Organization Users page', async function () {
     // Navigate to the Manage Organization Users page URL
-    await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users?page_number=1&sort=created_at%2Bdesc&limit=15');
+    await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users');
 
     // Wait for the "Manage Organization Users" element to be located
     await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')), 10000);
 });
-
-
-
 
 
 // When('I am on the Manage Organization Users page', async function () {
@@ -74,14 +71,10 @@ When('I click on {string} button', async function(button) {
         case 'Status':
             buttonId = 'status';
             break;
-        case 'Manage Organization Users':
-            buttonElement = await global.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Manage Organization Users")]')));
-            break;
         default:
             throw new Error(`Unknown button: ${button}`);
     }
-    const buttonElement = await driver.findElement(By.id(buttonId));
-    await buttonElement.click();
+    await buttonId.click();
     this.extractedData = []; // Initialize extracted data array
 
     do {
@@ -218,21 +211,9 @@ When('I click on a {string} button', async function (button) {
     }
 });
 
-
-// // Verify message text
-// Then('I should see a message {string}', async function (message) {
-//     for (let loop = 100; loop > 0; loop--) {
-//         await driver.manage().setTimeouts({ pageLoad: 300 });
-//         let pageSource = await driver.getPageSource();
-//         let check = pageSource.includes(message); 
-//         assert.ok(check, 'passed');
-//       }
-//   });
-
   //Search  
   When('I click on {string} bar', async function (elementText) {
-    const elementXPath = `//*[contains(text(), '${elementText}')]`;
-    await global.driver.findElement(By.xpath(elementXPath)).click();
+    await global.driver.wait(until.elementLocated(By.id('search-value'))).click();
 });
 
 
