@@ -18,6 +18,9 @@ Feature: Manage Organization Users
       | unkown@7edge.com | No exact matches found. Please try a different search |
       | unkown           | No exact matches found. Please try a different search |
 
+
+#Export button disabled
+
 #HAPPY PATH
 
     #EXPORT 
@@ -27,6 +30,7 @@ Feature: Manage Organization Users
     * I click on a "Export" button
     Then I should see a message "Organization user list exported successfully"
    
+  
    
     #Pagination
     #Search
