@@ -1,3 +1,4 @@
+@ManageOrganizationUsers
 Feature: Manage Organization Users
     As an admin
     I want to view the list of Organization Users

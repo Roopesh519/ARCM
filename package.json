@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "npm run test:login && npm run test:ManageOrganizationUsers",
+    "test:login": "cucumber-js features/login.feature",
+    "test:ManageOrganizationUsers": "cucumber-js features/ManageOrganizationUsers.feature"
   },
   "keywords": [],
   "author": "",
