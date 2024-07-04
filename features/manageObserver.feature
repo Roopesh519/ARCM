@@ -72,3 +72,8 @@ Feature: Manage Observers
         | status   |
         | Active   |
         | Inactive |
+
+
+        
+
+
