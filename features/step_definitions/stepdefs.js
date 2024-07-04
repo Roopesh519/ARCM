@@ -7,14 +7,12 @@ setDefaultTimeout(60 * 1000);
 let driver;
 
 BeforeAll(async function () {
-    driver = await new Builder().forBrowser('chrome').build();
-    global.driver = driver;
+  driver = await new Builder().forBrowser('chrome').build();
+  global.driver = driver;
 });
-
-
 AfterAll(async function () {
-    await driver.sleep(5000);
-    await driver.quit();
+  await driver.sleep(5000);
+  await driver.quit();
 });
 
 Given('I am on the login page', async function () {

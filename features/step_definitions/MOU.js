@@ -8,18 +8,18 @@ setDefaultTimeout(60 * 1000);
 
 
 Given('I am on the profile page', async function () {
-    await this.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/profile');
+    await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/profile');
     await new Promise(resolve => setTimeout(resolve, 500));
-    await this.driver.wait(until.elementLocated(By.xpath('//*[text()="My Profile"]')));
+    await global.driver.wait(until.elementLocated(By.xpath('//*[text()="My Profile"]')));
 });
 
 
 When('I am on the Manage Organization Users page', async function () {
     // Navigate to the Manage Organization Users page URL
-    await this.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users?page_number=1&sort=created_at%2Bdesc&limit=15');
+    await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users?page_number=1&sort=created_at%2Bdesc&limit=15');
 
     // Wait for the "Manage Organization Users" element to be located
-    await this.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')), 10000);
+    await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')), 10000);
 });
 
 
@@ -27,9 +27,9 @@ When('I am on the Manage Organization Users page', async function () {
 
 
 // When('I am on the Manage Organization Users page', async function () {
-//     await this.driver.wait(until.urlContains('manage-organization-users'));
-//     await this.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')));
-//     await this.driver.wait(until.elementLocated(By.css('table.table-auto')), 10000); // Adjust as necessary
+//     await global.driver.wait(until.urlContains('manage-organization-users'));
+//     await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')));
+//     await global.driver.wait(until.elementLocated(By.css('table.table-auto')), 10000); // Adjust as necessary
 // });
 
 
@@ -37,7 +37,7 @@ Then('I should see a table with the following rows:', async function (dataTable)
     // Verify the table rows
     const rows = dataTable.raw().flat();
     for (const row of rows) {
-        const rowElement = await this.driver.findElement(By.xpath(`//tr[contains(text(), '${row}')]`));
+        const rowElement = await global.driver.findElement(By.xpath(`//tr[contains(text(), '${row}')]`));
         expect(await rowElement.isDisplayed()).to.be.true;
     }
 });
@@ -45,14 +45,14 @@ Then('I should see a table with the following rows:', async function (dataTable)
 
 Then('The table should display a list of Organization Users', async function () {
     // Verify the table rows
-    const rows = await this.driver.wait(until.elementsLocated(By.css('table.table-auto tbody tr')));
+    const rows = await global.driver.wait(until.elementsLocated(By.css('table.table-auto tbody tr')));
     expect(rows.length).to.be.greaterThan(0);
 });
 
 
 // Then('I should see a total number of records displayed at the bottom', async function () {
 //     // Verify the total number of records
-//     const totalRecordsElement = await this.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Total Number of Records')]")));
+//     const totalRecordsElement = await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Total Number of Records')]")));
 //     expect(await totalRecordsElement.isDisplayed()).to.be.true;
 //     const totalRecordsText = await totalRecordsElement.getText();
 //     expect(totalRecordsText).to.match(/Total Number of Records:\d+/);
@@ -75,7 +75,7 @@ When('I click on {string} button', async function(button) {
             buttonId = 'status';
             break;
         case 'Manage Organization Users':
-            buttonElement = await this.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Manage Organization Users")]')));
+            buttonElement = await global.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Manage Organization Users")]')));
             break;
         default:
             throw new Error(`Unknown button: ${button}`);
@@ -196,10 +196,10 @@ When('I click on a {string} button', async function (button) {
     let buttonElement;
     switch(button) {
         case 'icon-export':
-            buttonElement = await this.driver.wait(until.elementLocated(By.id('icon-export')));
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('icon-export')));
             break;
         case 'Export':
-            buttonElement = await this.driver.wait(until.elementLocated(By.id('Export')));
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Export')));
             break;
             
         default:
@@ -211,7 +211,7 @@ When('I click on a {string} button', async function (button) {
 
   Then('I should see a Popup box "Select columns to export"', async function () {
     const messageXPath = '//*[contains(text(), "Select columns to export")]';
-    const messageElement = await this.driver.wait(until.elementLocated(By.xpath(messageXPath)), 10000);
+    const messageElement = await global.driver.wait(until.elementLocated(By.xpath(messageXPath)), 10000);
     const messageText = await messageElement.getText();
     if (messageText !== "Select columns to export") {
         throw new Error('Message "Select columns to export" not found');
@@ -232,13 +232,13 @@ When('I click on a {string} button', async function (button) {
   //Search  
   When('I click on {string} bar', async function (elementText) {
     const elementXPath = `//*[contains(text(), '${elementText}')]`;
-    await this.driver.findElement(By.xpath(elementXPath)).click();
+    await global.driver.findElement(By.xpath(elementXPath)).click();
 });
 
 
 When('I enter text as {string}', async function (details) {
     if (!this.searchBar) {
-        this.searchBar = await this.driver.findElement(By.id('search-value'));
+        this.searchBar = await global.driver.findElement(By.id('search-value'));
     }
     await this.searchBar.sendKeys(details);
 });
