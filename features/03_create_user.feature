@@ -10,7 +10,7 @@ Scenario: Cancel adding new User at beginning
         Then I am on the Manage Organization Users page 
 
 
-Scenario Outline: Cancel adding new User at end
+Scenario: Cancel adding new User at end
         Given I navigate to the Add Organization User
         When I enter username as "rama@7edge.com"
         And I enter First Name as "rama"
@@ -29,11 +29,6 @@ Scenario Outline: Cancel adding new User at end
         Then I should see a message "Are you sure you want to cancel the changes?"
         When I click on "Yes" button
         Then I am on the Manage Organization Users page       
-
-        Example:
-        |Btn|msg|
-        |Yes|
-        |No |
 
 
 #IGNORE
