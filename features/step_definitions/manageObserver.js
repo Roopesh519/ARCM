@@ -79,6 +79,7 @@ When('I enter text as {string}', async function (text) {
 
        
          Then('I should see a pop up window for Filter', async function () {
+            await new Promise(resolve => setTimeout(resolve, 5000));
             await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Filter by:')]")));
          });
        
