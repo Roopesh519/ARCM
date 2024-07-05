@@ -4,22 +4,55 @@ Feature: Manage Observers
     So that I can manage them effectively
 
 
-    Scenario: Login with valid credentials
-        Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
-        And I click on the "login" button
-        Then I should see a dialog box to select preference for otp verification
-        When I click on the "Select Preference" button
-        And I select my Preference
-        And I click on the "send" button
-        Then I see otp verification page
-        When I enter otp as "981256"
-        And I click on the "verify otp" button
-        Then I should see a message Do you want to trust this browser
-        When I click on the "No, I Don't" button
-        Then I navigate to profile page
-        And I should see a message "Login successful"
+    # Scenario: Login with valid credentials
+    #     Given I am on the login page
+    #     When I enter my username as "roopesh.yadava@7edge.com"
+    #     And I enter my password as "Admin@1234"
+    #     And I click on the "login" button
+    #     Then I should see a dialog box to select preference for otp verification
+    #     When I click on the "Select Preference" button
+    #     And I select my Preference
+    #     And I click on the "send" button
+    #     Then I see otp verification page
+    #     When I enter otp as "981256"
+    #     And I click on the "verify otp" button
+    #     Then I should see a message Do you want to trust this browser
+    #     When I click on the "No, I Don't" button
+    #     Then I navigate to profile page
+    #     And I should see a message "Login successful"
+
+
+    Scenario: List All observer accounts
+        Given I am on the manage observer page
+        Then I should see table header containing:
+            | ID                      |
+            | Username                |
+            | First Name              |
+            | Last Name               |
+            | Status                  |
+            | Patient Associated with |
+            | Sub Division Name       |
+            | Email Address           |
+            | Mobile Number           |
+            | Main Number             |
+            | Created Date            |
+            | Actions                 |
+
+
+    Scenario: Search existing observer with ID
+        Given I am on the manage observer page
+        When I search for a particular observer with ID
+        Then I should see the list of observer with the searched ID
+
+    Scenario: Search existing observers with Username
+        Given I am on the manage observer page
+        When I search for a particular observer with username
+        Then I should see the list of observer with the searched username
+
+    Scenario: Search existing observer with first name
+        Given I am on the manage observer page
+        When I search for a particular observer with the first name
+        Then I should see the list of observer with the searched firstname
 
 
     Scenario Outline: Sort functionality

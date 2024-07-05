@@ -75,33 +75,84 @@ When('I click on {string} button', async function (button) {
     await buttonElement.click();
 });
 
+//----------------------listing-------------------------
 
-Then('I should see a table with the following columns:', async function (dataTable) {
-    // Verify the table headers
-    const headers = dataTable.raw().flat();
-    for (const header of headers) {
-        const headerElement = await global.driver.findElement(By.xpath(`//th[contains(text(), '${header}')]`));
-        expect(await headerElement.isDisplayed()).to.be.true;
-    }
+Then('I should see table header containing:', { timeout: 10 * 1000 }, async function (dataTable) {
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    const expectedColumns = dataTable.raw().flat(); // Extracts column names from the table and flattens them into a single array
+
+    const tableHeaderElement = await driver.wait(until.elementLocated(By.xpath('//table/thead')));
+    const tableHeaderText = await tableHeaderElement.getText();
+
+    expectedColumns.forEach(column => {
+        assert(tableHeaderText.includes(column.trim()), `Table header does not contain column: ${column}`);
+    });
 });
 
 
-Then('the table should display a list of observers', async function () {
-    // Verify the table rows
-    const rows = await global.driver.wait(until.elementsLocated(By.css('table.table-auto tbody tr')));
-    expect(rows.length).to.be.greaterThan(0);
+// Step definition for searching observer by ID
+When('I search for a particular observer with ID', async function () {
+    const idElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[2]`)));
+    const observerID = await idElement.getText();
+    this.ID = observerID;
+
+    const searchField = await driver.findElement(By.id(`search-value`));
+    await searchField.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await searchField.sendKeys(observerID);
+    await new Promise(resolve => setTimeout(resolve, 1500)); // wait for 1.5 seconds
+});
+
+Then('I should see the list of observer with the searched ID', async function () {
+    const idElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[2]`)));
+    const searchedID = await idElement.getText();
+
+    console.log('Original ID:', this.ID, 'Searched ID:', searchedID);
+    assert.strictEqual(searchedID, this.ID, 'The searched ID does not match the expected ID.');
+});
+
+// Step definition for searching observer by username
+When('I search for a particular observer with username', async function () {
+    const usernameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[3]`)));
+    const observerUsername = await usernameElement.getText();
+    this.username = observerUsername;
+
+    const searchField = await driver.findElement(By.id(`search-value`));
+    await searchField.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await searchField.sendKeys(observerUsername);
+    await new Promise(resolve => setTimeout(resolve, 1500)); // wait for 1.5 seconds
+});
+
+Then('I should see the list of observer with the searched username', async function () {
+    const usernameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[3]`)));
+    const searchedUsername = await usernameElement.getText();
+
+    console.log('Original Username:', this.username, 'Searched Username:', searchedUsername);
+    assert.strictEqual(searchedUsername, this.username, 'The searched username does not match the expected username.');
+});
+
+// Step definition for searching observer by first name
+When('I search for a particular observer with the first name', async function () {
+    const firstNameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[4]`)));
+    const observerFirstName = await firstNameElement.getText();
+    this.firstname = observerFirstName;
+
+    const searchField = await driver.findElement(By.id(`search-value`));
+    await searchField.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await searchField.sendKeys(observerFirstName);
+    await new Promise(resolve => setTimeout(resolve, 1500)); // wait for 1.5 seconds
+});
+
+Then('I should see the list of observer with the searched firstname', async function () {
+    const firstNameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[4]`)));
+    const searchedFirstName = await firstNameElement.getText();
+
+    console.log('Original First Name:', this.firstname, 'Searched First Name:', searchedFirstName);
+    assert.strictEqual(searchedFirstName, this.firstname, 'The searched first name does not match the expected first name.');
 });
 
 
-Then('I should see a total number of records displayed at the bottom', async function () {
-    // Verify the total number of records
-    const totalRecordsElement = await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Total Number of Records')]")));
-    expect(await totalRecordsElement.isDisplayed()).to.be.true;
-    const totalRecordsText = await totalRecordsElement.getText();
-    expect(totalRecordsText).to.match(/Total Number of Records:\d+/);
-});
-
-
+//----------------------listing ends--------------------
 
 When('I enter text as {string}', async function (text) {
     const searchInput = await global.driver.wait(until.elementLocated(By.id('search-value')));
@@ -241,6 +292,7 @@ When('I click on sort {string}', async function (sort_by) {
     }
 });
 
+
 Then('I should see the observer sorted in ascending order based on {string}', async function (sort_by) {
     await new Promise(resolve => setTimeout(resolve, 3000));
     let items;
@@ -265,6 +317,7 @@ Then('I should see the observer sorted in ascending order based on {string}', as
             break;
     }
 });
+
 
 Then('I should see the observer sorted in descending order based on {string}', async function (sort_by) {
     await new Promise(resolve => setTimeout(resolve, 3000));

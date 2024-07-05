@@ -39,31 +39,37 @@ Feature: Add Observer
             | invalidemail.com | John      | Doe      | 9999999999   | 9999999999 | 123 Main St. Apt #5  | Invalid user name                       |
             | user@domain      | Jane      | Smith    | 9999999999   | 9999999999 | 456 Elm St. Apt #3   | Invalid user name                       |
             | user@domain.com  | John      | Doe      | 12345abc     | 9999999999 | 789 Main St. Apt #4  | Invalid Mobile Number                   |
-            | user@domain.com  | Jane      | Smith    | 9999999999   | 1234abcd   | 123 Elm St. Apt #2   | Invalid Main Number                    |
+            | user@domain.com  | Jane      | Smith    | 9999999999   | 1234abcd   | 123 Elm St. Apt #2   | Invalid Main Number                     |
             |                  | John      | Doe      | 9999999999   | 9999999999 | 123 Maple St. Apt #6 | Please fill in all the mandatory fields |
             | user@domain.com  |           | Doe      | 9999999999   | 9999999999 | 456 Oak St. Apt #1   | Please fill in all the mandatory fields |
             | user@domain.com  | John      |          | 9999999999   | 9999999999 | 789 Pine St. Apt #7  | Please fill in all the mandatory fields |
             | user@domain.com  | John      | Doe      | 9999999999   |            | 123 Birch St. Apt #3 | Please fill in all the mandatory fields |
 
-        
-    # happy
-    # Scenario: Adding user with correct credentials
-    #     Given I am on the add observer page
-    #     When I enter username as "<UserName>"
-    #     And I enter first name as "<FirstName>"
-    #     * I enter last name as "<LastName>"
-    #     * I enter mobile number as "<MobileNumber>"
-    #     * I enter main number as "<MainNumber>"
-    #     * I enter address as "<Address>"
-    #     * I click on "Sub Division Name" button
-    #     * I click on "Subdivision" button
-    #     * I click on "Select patient" button
-    #     * I click on "Patient" button
-    #     Then I should see a pop up box for confirmation
-    #     When I click on "Yes" button
-    #     Then I should see a message "Patient associated successfully"
-    #     When I click on "submit" button
-    #     Then I should see a message "Observer added successfully"
+
+#     happy
+#     Scenario: Adding user with correct credentials
+#         Given I am on the add observer page
+#         When I enter username as "<UserName>"
+#         And I enter first name as "<FirstName>"
+#         * I enter last name as "<LastName>"
+#         * I enter mobile number as "<MobileNumber>"
+#         * I enter main number as "<MainNumber>"
+#         * I enter address as "<Address>"
+#         * I click on "Sub Division Name" button
+#         * I click on "Subdivision" button
+#         * I click on "Select patient" button
+#         * I click on "Patient" button
+#         Then I should see a pop up box for confirmation
+#         When I click on "Yes" button
+#         Then I should see a message "Patient associated successfully"
+#         When I click on "submit" button
+#         Then I should see a message "Observer added successfully"
+
+#     Scenario: Check Email Validation for Already Verified
+#         Given I am in updated manage observer page
+#         Given I am in searched update observer page
+#         When  I enter already verified email address
+#         Then  I should see status of email is verified
 
 
 # yes id === add_admin
