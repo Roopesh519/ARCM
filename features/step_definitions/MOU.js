@@ -145,44 +145,6 @@ When('I click on sort {string}', async function (sort_by) {
     }
 });
 
-// Then('I should see the Organization Users sorted in ascending order based on {string}', async function (sort_by) {
-//     await new Promise(resolve => setTimeout(resolve, 3000));
-//     let items;
-//     let item_texts;
-//     let sorted_item_texts;
-//     switch (sort_by) {
-//         case 'ID':
-//             items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
-//             item_texts = await Promise.all(items.map((item) => item.getText()));
-//             sorted_item_texts = [...item_texts].sort();
-//             assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
-//             await new Promise(resolve => setTimeout(resolve, 500));
-//             break;
-//         case 'Username':
-//             items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
-//             item_texts = await Promise.all(items.map((item) => item.getText()));
-//             sorted_item_texts = [...item_texts].sort();
-//             assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
-//             await new Promise(resolve => setTimeout(resolve, 500));
-//             break;
-//         case 'First Name':
-//             items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(4)`)));
-//             item_texts = await Promise.all(items.map((item) => item.getText()));
-//             sorted_item_texts = [...item_texts].sort();
-//             assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
-//             await new Promise(resolve => setTimeout(resolve, 500));
-//             break;
-//         case 'Status':
-//             items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(7)`)));
-//             item_texts = await Promise.all(items.map((item) => item.getText()));
-//             sorted_item_texts = [...item_texts].sort();
-//             assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
-//             await new Promise(resolve => setTimeout(resolve, 500));
-//             break;        
-//         default:
-//             break;
-//     }
-// });
 
 Then('I should see the Organization Users sorted in ascending order based on {string}', async function (sort_by) {
     await new Promise(resolve => setTimeout(resolve, 5000)); // Increase wait time if necessary
@@ -214,44 +176,38 @@ Then('I should see the Organization Users sorted in ascending order based on {st
 
     assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
 });
+
 Then('I should see the Organization Users sorted in descending order based on {string}', async function (sort_by) {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 5000)); // Increase wait time if necessary
     let items;
     let item_texts;
     let sorted_item_texts;
     switch (sort_by) {
         case 'ID':
-            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
-            item_texts = await Promise.all(items.map((item) => item.getText()));
-            sorted_item_texts = [...item_texts].sort().reverse();
-            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
-            await new Promise(resolve => setTimeout(resolve, 500));
+            items = await driver.wait(until.elementsLocated(By.css('tbody > tr > td:nth-child(2)')));
             break;
         case 'Username':
-            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
-            item_texts = await Promise.all(items.map((item) => item.getText()));
-            sorted_item_texts = [...item_texts].sort().reverse();
-            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
-            await new Promise(resolve => setTimeout(resolve, 500));
+            items = await driver.wait(until.elementsLocated(By.css('tbody > tr > td:nth-child(3)')));
             break;
         case 'First Name':
-            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(4)`)));
-            item_texts = await Promise.all(items.map((item) => item.getText()));
-            sorted_item_texts = [...item_texts].sort().reverse();
-            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
-            await new Promise(resolve => setTimeout(resolve, 500));
+            items = await driver.wait(until.elementsLocated(By.css('tbody > tr > td:nth-child(4)')));
             break;
         case 'Status':
-            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(7)`)));
-            item_texts = await Promise.all(items.map((item) => item.getText()));
-            sorted_item_texts = [...item_texts].sort().reverse();
-            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
-            await new Promise(resolve => setTimeout(resolve, 500));
+            items = await driver.wait(until.elementsLocated(By.css('tbody > tr > td:nth-child(7)')));
             break;
         default:
-            break;
+            throw new Error(`Unknown sort_by value: ${sort_by}`);
     }
+
+    item_texts = await Promise.all(items.map((item) => item.getText().then(text => text.trim().toLowerCase())));
+    sorted_item_texts = [...item_texts].sort().reverse();
+
+    console.log('Actual:', item_texts);
+    console.log('Expected:', sorted_item_texts);
+
+    assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
 });
+
 
 
 Then('The Export button is disabled', async function () {

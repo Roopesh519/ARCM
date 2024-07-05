@@ -30,7 +30,7 @@ Feature: Manage Organization Users
         And I should see the Organization Users sorted in descending order based on <sort>
         Examples:
             | sort         |
-            | "ID"         |
+            | "ID"         |<sort>
             | "Username"   |
             | "First Name" |
             | "Status"     |
@@ -52,7 +52,7 @@ Feature: Manage Organization Users
         Given I am on the manage Organization Users page
         When I click on "icon-export" button
         * I click on "Export" button
-        Then I should see a message "Organization Users list exported successfully"
+        Then I should see a message "Organization user list exported successfully"
 
 
 
