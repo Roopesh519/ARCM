@@ -32,11 +32,25 @@ When('I store the details of the observer', async function () {
 
 Then('I should be redirected to view page', async function () {
     await new Promise(resolve => setTimeout(resolve, 2000));
-    await global.driver.wait(until.elementLocated(By.xpath(`//h1[text()="View Observer"]`)))
+    await global.driver.wait(until.elementLocated(By.xpath(`//h1[text()="View Observer"]`)));
 });
 
 
 Then('I validate the details of the observer', async function(){
-    // const ID = await driver.wait(until.elementLocated(By.xpath('//table/thead'))).getText();
-    return passed;
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    const pageSource = await driver.getPageSource();
+
+    // Array of keys in the order they are stored
+    const keys = Object.keys(this.firstRowData);
+
+    // Iterate over each key-value pair in the stored data, skipping the 7th field
+    for (let i = 0; i < keys.length; i++) {
+        if (i === 5) continue; // Skip the 7th field (index 6)
+        if (i === 8) continue;
+        const key = keys[i];
+        const value = this.firstRowData[key];
+        
+        const isPresent = pageSource.includes(value);
+        assert(isPresent, `The value ${value} for ${key} was not found in the page source`);
+    }
 });
