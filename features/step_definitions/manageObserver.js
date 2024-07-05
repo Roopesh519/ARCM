@@ -108,7 +108,6 @@ Then('I should see a pop up window for Filter', async function () {
 });
 
 When('I click on the filter by the {string}', async function (status) {
-    await driver.wait(until.elementLocated(By.id('filter'))).click()
     await new Promise(resolve => setTimeout(resolve, 1000));
     switch (status) {
     case 'Active':
@@ -136,7 +135,6 @@ Then('I should see the list of observer with status as {string}', async function
         item_texts = await Promise.all(items.map((item) => item.getText()));
         console.log('item_texts', item_texts);
         item_texts.map((data) => {
-            console.log("ddd",data,string)
             assert.equal(string, data);
         });
         break;
