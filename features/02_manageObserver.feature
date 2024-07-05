@@ -22,21 +22,6 @@ Feature: Manage Observers
     #     And I should see a message "Login successful"
 
 
-    # Scenario: Display list of observers
-    #     Given I am in my profile page
-    #     When I click on manage observer
-    #     Then I should see a table with the following columns:
-    #         | ID                      |
-    #         | Username                |
-    #         | First Name              |
-    #         | Last Name               |
-    #         | Status                  |
-    #         | Patient Associated with |
-    #         | Sub Division Name       |
-    #         | Email Address           |
-    #     And the table should display a list of observers
-
-
     Scenario Outline: Invalid Search with ID, First Name, Email
         Given I am on the manage observer page
         When I click on "Search" button
@@ -50,30 +35,26 @@ Feature: Manage Observers
             | unkown           | No exact matches found. Please try a different search |
 
 
-    Scenario: Filter operation by date
-        Given I am on the manage observer page
-        When I click on "Filter" button
-        Then I should see a pop up window for Filter
-        When I enter start date as "Jul 02, 2024"
-        And I enter end date as "Jul 03, 2024"
-        * I click on "Apply" button
-        Then I should see the filter applied 
-
-    
-    Scenario: Filter operation by status
-        Given I am on the manage observer page
-        When I click on "Filter" button
-        Then I should see a pop up window for Filter
-        When I select status as "<status>"
-        And I click on "Apply" button
-        Then I should see the filter applied 
+    Scenario Outline: Filter functionality
+        Given I am in observer listing screen
+        When I click on the filter by the <status>
+        When I apply the filter for observer
+        Then I should see the list of observer with status as <status>
 
         Examples:
-        | status   |
-        | Active   |
-        | Inactive |
+            | status     |
+            | "Active"   |
+            | "Inactive" |
 
 
-        
+    Scenario:Filter By Created Date
+        Given I am in observer listing screen
+        When I click on filter
+        When I enter start date and end date
+        When I apply the filter for observer
+        Then I should see the date filter applied
+
+
+
 
 

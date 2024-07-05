@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "chromedriver": "^126.0.4",
+    "date-fns": "^3.6.0",
     "mocha": "^10.5.2",
+    "moment": "^2.30.1",
     "msedgedriver": "^91.0.0"
   }
 }

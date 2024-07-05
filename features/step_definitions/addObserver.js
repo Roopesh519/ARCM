@@ -14,7 +14,7 @@ Given('I am on the manager observer page', async function(){
 Given('I am on the add observer page', async function(){
     await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-observer/add-observer');
     await new Promise(resolve => setTimeout(resolve, 1000));
-    await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Add Observer"]')));
+    await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Add  Observer"]')));
 });
 
 Then('I should navigate to the add observer page', async function (){
