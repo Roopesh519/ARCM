@@ -52,7 +52,7 @@ Feature: Manage Organization Users
         Given I am on the manage Organization Users page
         When I click on "icon-export" button
         * I click on "Export" button
-        Then I should see a message "Organization Userss list exported successfully"
+        Then I should see a message "Organization Users list exported successfully"
 
 
 

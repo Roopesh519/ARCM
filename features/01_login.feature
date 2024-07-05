@@ -6,7 +6,7 @@ Feature: Login feature
     Scenario Outline: Login with invalid or empty details
         Given I am on the login page
         When I enter my username as "<username>"
-        And I enter my password as "<password>"
+        * I enter my password as "<password>"
         * I click on the "login" button
         Then I should see a message "<message>"
 
@@ -22,11 +22,11 @@ Feature: Login feature
     Scenario: Cancel preference selection
         Given I am on the login page
         When I enter my username as "rahul.mallya@7edge.com"
-        And I enter my password as "Admin@1234"
+        * I enter my password as "Admin@1234"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification
         When I click on the "Select Preference" button
-        And I select my Preference
+        * I select my Preference
         When I click on the "Cancel" button
         Then I navigate to login page
 
