@@ -107,15 +107,6 @@ Then('I should see a pop up window for Filter', async function () {
     await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Filter by:')]")));
 });
 
-
-
-// code based murali
-
-Given('I am in observer listing screen', async function () {
-    await driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-observer');
-    await driver.wait(until.elementLocated(By.id('root')), 5000);
-});
-
 When('I click on the filter by the {string}', async function (status) {
     await driver.wait(until.elementLocated(By.id('filter'))).click()
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -165,13 +156,13 @@ When('I click on filter', async function () {
     await driver.wait(until.elementLocated(By.id('filter')), 3000).click()
 });
 
-// When('I enter start date as {string} and end date as {string}', async function (startdate, enddate) {
-//     const startDateElement = await global.driver.wait(until.elementLocated(By.id('filter_start_date')), 3000);
-//     await startDateElement.sendKeys(startdate, Key.ENTER);
-//     const endDateElement = await global.driver.wait(until.elementLocated(By.id('filter_end_date')), 3000);
-//     await endDateElement.sendKeys(enddate, Key.ENTER);
+When('I enter start date as {string} and end date as {string}', async function (startdate, enddate) {
+    const startDateElement = await global.driver.wait(until.elementLocated(By.id('filter_start_date')), 3000);
+    await startDateElement.sendKeys(startdate, Key.ENTER);
+    const endDateElement = await global.driver.wait(until.elementLocated(By.id('filter_end_date')), 3000);
+    await endDateElement.sendKeys(enddate, Key.ENTER);
 
-// });
+});
 
 When('I apply the filter for observer', async function () {
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -218,3 +209,79 @@ When("I should see the date filter applied", async function () {
     // Compare each formatted date with the expected date
     date_compare.forEach((date) => assert.equal(expected_date, date));
 });
+
+
+// sort
+
+When('I click on sort {string}', async function (sort_by) {
+    // Write code here that turns the phrase above into concrete actions
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    switch (sort_by) {
+    case 'ID':
+        // Write code here that turns the phrase above into concrete actions
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await driver.wait(until.elementLocated(By.id(`id`))).click()
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        break;
+    case 'Username':
+        // Write code here that turns the phrase above into concrete actions
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await driver.wait(until.elementLocated(By.id(`username`))).click()
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        break;
+    default:
+        break;
+    }
+});
+
+Then('I should see the observer sorted in ascending order based on {string}', async function (sort_by) {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    let items;
+    let item_texts;
+    let sorted_item_texts;
+    switch (sort_by) {
+    case 'ID':
+        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
+        item_texts = await Promise.all(items.map((item) => item.getText()));
+        sorted_item_texts = [...item_texts].sort();
+        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
+        await new Promise(resolve => setTimeout(resolve, 500));
+        break;
+    case 'Username':
+        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
+        item_texts = await Promise.all(items.map((item) => item.getText()));
+        sorted_item_texts = [...item_texts].sort();
+        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
+        await new Promise(resolve => setTimeout(resolve, 500));
+        break;
+    default:
+        break;
+    }
+});
+
+Then('I should see the observer sorted in descending order based on {string}', async function (sort_by) {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    let items;
+    let item_texts;
+    let sorted_item_texts;
+    switch (sort_by) {
+    case 'ID':
+        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
+        item_texts = await Promise.all(items.map((item) => item.getText()));
+        sorted_item_texts = [...item_texts].sort().reverse();
+        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
+        await new Promise(resolve => setTimeout(resolve, 500));
+        break;
+    case 'Username':
+        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
+        item_texts = await Promise.all(items.map((item) => item.getText()));
+        sorted_item_texts = [...item_texts].sort().reverse();
+        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
+        await new Promise(resolve => setTimeout(resolve, 500));
+        break;
+    default:
+        break;
+    }
+});
+
+
