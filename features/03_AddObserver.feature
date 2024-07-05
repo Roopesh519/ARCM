@@ -2,22 +2,22 @@ Feature: Add Observer
     As a admin
     I want to add observer
 
-    # Scenario: Login with valid credentials
-    #     Given I am on the login page
-    #     When I enter my username as "roopesh.yadava@7edge.com"
-    #     And I enter my password as "Admin@1234"
-    #     * I click on the "login" button
-    #     Then I should see a dialog box to select preference for otp verification
-    #     When I click on the "Select Preference" button
-    #     And I select my Preference
-    #     * I click on the "send" button
-    #     Then I see otp verification page
-    #     When I enter otp as "981256"
-    #     And I click on the "verify otp" button
-    #     Then I should see a message Do you want to trust this browser
-    #     When I click on the "No, I Don't" button
-    #     Then I navigate to profile page
-    #     And I should see a message "Login successful"
+    Scenario: Login with valid credentials
+        Given I am on the login page
+        When I enter my username as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@1234"
+        * I click on the "login" button
+        Then I should see a dialog box to select preference for otp verification
+        When I click on the "Select Preference" button
+        And I select my Preference
+        * I click on the "send" button
+        Then I see otp verification page
+        When I enter otp as "981256"
+        And I click on the "verify otp" button
+        Then I should see a message Do you want to trust this browser
+        When I click on the "No, I Don't" button
+        Then I navigate to profile page
+        And I should see a message "Login successful"
 
 
     Scenario: Add Observer
@@ -46,34 +46,28 @@ Feature: Add Observer
             | user@domain.com  | John      | Doe      | 9999999999   |            | 123 Birch St. Apt #3 | Please fill in all the mandatory fields |
 
 
-#     happy
-#     Scenario: Adding user with correct credentials
-#         Given I am on the add observer page
-#         When I enter username as "<UserName>"
-#         And I enter first name as "<FirstName>"
-#         * I enter last name as "<LastName>"
-#         * I enter mobile number as "<MobileNumber>"
-#         * I enter main number as "<MainNumber>"
-#         * I enter address as "<Address>"
-#         * I click on "Sub Division Name" button
-#         * I click on "Subdivision" button
-#         * I click on "Select patient" button
-#         * I click on "Patient" button
-#         Then I should see a pop up box for confirmation
-#         When I click on "Yes" button
-#         Then I should see a message "Patient associated successfully"
-#         When I click on "submit" button
-#         Then I should see a message "Observer added successfully"
+    # happy
+    Scenario: Adding user with correct credentials
+        Given I am on the add observer page
+        When I enter username as "testuser+62171876@7edge.com"
+        And I enter first name as "testuser123"
+        * I enter last name as "shettigar"
+        * I enter mobile number as "9876487354"
+        * I enter main number as "9876487354"
+        * I enter address as "mangalore"
+        * I click on "Sub Division Name" button
+        * I click on "Subdivision" button
+        * I click on "Select patient" button
+        * I click on "Patient" button
+        Then I should see a pop up box for confirmation
+        When I click on "Yes" button
+        Then I should see a message "Patient associated successfully"
+        When I click on "submit" button
+        And I click on "No" button
+        # Then I should see a message "Observer added successfully"
 
 #     Scenario: Check Email Validation for Already Verified
-#         Given I am in updated manage observer page
+#         Given I am on the manage observer page
 #         Given I am in searched update observer page
 #         When  I enter already verified email address
 #         Then  I should see status of email is verified
-
-
-# yes id === add_admin
-# no id === Cancel
-
-
-#  clcik on submit  --- message === Organization user added successfully

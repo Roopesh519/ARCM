@@ -1,7 +1,6 @@
 const assert = require('assert');
-const { BeforeAll, AfterAll, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
-const { By, Key, Keys, Builder, until } = require('selenium-webdriver');
-const moment = require("moment")
+const { Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
+const { By, Key, until } = require('selenium-webdriver');
 const { format, subDays, parse } = require('date-fns');
 
 setDefaultTimeout(60 * 1000);
@@ -67,6 +66,9 @@ When('I click on {string} button', async function (button) {
             break;
         case 'Export':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Export')));
+            break;
+        case 'No':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
             break;
         default:
             console.log('Invalid button string');
