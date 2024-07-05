@@ -23,7 +23,7 @@ Feature: Manage Observers
 
 
 
-    Scenario: List All observer accounts
+    Scenario: Listing All observers
         Given I am on the manage observer page
         Then I should see table header containing:
             | ID                      |
@@ -40,23 +40,23 @@ Feature: Manage Observers
             | Actions                 |
 
 
-    Scenario: Search existing observer with ID
+    Scenario: Search for already existing observer with ID
         Given I am on the manage observer page
         When I search for a particular observer with ID
         Then I should see the list of observer with the searched ID
 
-    Scenario: Search existing observers with Username
+    Scenario: Search for already existing observers with Username
         Given I am on the manage observer page
         When I search for a particular observer with username
         Then I should see the list of observer with the searched username
 
-    Scenario: Search existing observer with first name
+    Scenario: Search for already existing observer with first name
         Given I am on the manage observer page
         When I search for a particular observer with the first name
         Then I should see the list of observer with the searched firstname
 
 
-    Scenario Outline: Sort functionality
+    Scenario Outline: Performing based on ID and Username
         Given I am on the manage observer page
         When I click on sort <sort>
         Then I should see the observer sorted in ascending order based on <sort>
