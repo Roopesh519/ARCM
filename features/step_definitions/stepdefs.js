@@ -7,12 +7,14 @@ setDefaultTimeout(60 * 1000);
 let driver;
 
 BeforeAll(async function () {
-  driver = await new Builder().forBrowser('chrome').build();
-  global.driver = driver;
+    driver = await new Builder().forBrowser('chrome').build();
+    global.driver = driver;
 });
+
+
 AfterAll(async function () {
-  await driver.sleep(5000);
-  await driver.quit();
+    await driver.sleep(5000);
+    await driver.quit();
 });
 
 Given('I am on the login page', async function () {
@@ -173,21 +175,3 @@ Then('I navigate to login page', async function () {
 
 
   // ------------------------------------------------------------------------------------------- //
-// const assert = require('assert'); 
-// const { Before, After, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
-// const { By, Key, Builder, until, Select} = require('selenium-webdriver')
-// const { faker } = require('@faker-js/faker');
-
-// setDefaultTimeout(60 * 1000);
-
-// let driver;
-
-// Before(async function () {
-//     driver = await new Builder().forBrowser('MicrosoftEdge').build();
-// });
-
-// After(async function () {
-//     await driver.quit();
-// });
-
-
