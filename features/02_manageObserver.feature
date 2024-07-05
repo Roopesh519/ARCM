@@ -22,6 +22,7 @@ Feature: Manage Observers
     #     And I should see a message "Login successful"
 
 
+
     Scenario: List All observer accounts
         Given I am on the manage observer page
         Then I should see table header containing:
