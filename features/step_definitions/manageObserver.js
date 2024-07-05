@@ -59,6 +59,15 @@ When('I click on {string} button', async function (button) {
         case 'Clear All':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
             break;
+        case 'Clear-all':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('id1')));
+            break;
+        case 'icon-export':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('icon-export')));
+            break;
+        case 'Export':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Export')));
+            break;
         default:
             console.log('Invalid button string');
             return;
@@ -110,17 +119,17 @@ Then('I should see a pop up window for Filter', async function () {
 When('I click on the filter by the {string}', async function (status) {
     await new Promise(resolve => setTimeout(resolve, 1000));
     switch (status) {
-    case 'Active':
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        await driver.executeScript(`document.querySelector("#active").click()`)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        break;
-    case 'Inactive':
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        await driver.executeScript(`document.querySelector("#inactive").click()`)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        break;
-    
+        case 'Active':
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            await driver.executeScript(`document.querySelector("#active").click()`)
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            break;
+        case 'Inactive':
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            await driver.executeScript(`document.querySelector("#inactive").click()`)
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            break;
+
     }
 });
 
@@ -130,23 +139,23 @@ Then('I should see the list of observer with status as {string}', async function
     let items;
     let item_texts;
     switch (string) {
-    case 'Active':
-        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(6) > div > span`)));
-        item_texts = await Promise.all(items.map((item) => item.getText()));
-        console.log('item_texts', item_texts);
-        item_texts.map((data) => {
-            assert.equal(string, data);
-        });
-        break;
-    case 'Inactive':
-        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(6)`)));
-        item_texts = await Promise.all(items.map((item) => item.getText()));
-        item_texts.map((data) => {
-            assert.equal(string, data);
-        });
-        break;
-    default:
-        break;
+        case 'Active':
+            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(6) > div > span`)));
+            item_texts = await Promise.all(items.map((item) => item.getText()));
+            console.log('item_texts', item_texts);
+            item_texts.map((data) => {
+                assert.equal(string, data);
+            });
+            break;
+        case 'Inactive':
+            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(6)`)));
+            item_texts = await Promise.all(items.map((item) => item.getText()));
+            item_texts.map((data) => {
+                assert.equal(string, data);
+            });
+            break;
+        default:
+            break;
     }
 });
 
@@ -175,10 +184,10 @@ When('I enter start date and end date', async function () {
     this.yesterday = subDays(today, 1);
     this.filter_date = format(this.yesterday, 'MMM dd, yyyy');
     console.log("date", this.yesterday);
-    
+
     const startDateElement = await driver.wait(until.elementLocated(By.id('filter_start_date')), 3000);
     await startDateElement.sendKeys(this.filter_date, Key.ENTER);
-    
+
     const endDateElement = await driver.wait(until.elementLocated(By.id('filter_end_date')), 3000);
     await endDateElement.sendKeys(this.filter_date, Key.ENTER);
 });
@@ -215,20 +224,20 @@ When('I click on sort {string}', async function (sort_by) {
     // Write code here that turns the phrase above into concrete actions
     await new Promise(resolve => setTimeout(resolve, 2000));
     switch (sort_by) {
-    case 'ID':
-        // Write code here that turns the phrase above into concrete actions
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await driver.wait(until.elementLocated(By.id(`id`))).click()
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        break;
-    case 'Username':
-        // Write code here that turns the phrase above into concrete actions
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await driver.wait(until.elementLocated(By.id(`username`))).click()
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        break;
-    default:
-        break;
+        case 'ID':
+            // Write code here that turns the phrase above into concrete actions
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await driver.wait(until.elementLocated(By.id(`id`))).click()
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            break;
+        case 'Username':
+            // Write code here that turns the phrase above into concrete actions
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await driver.wait(until.elementLocated(By.id(`username`))).click()
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            break;
+        default:
+            break;
     }
 });
 
@@ -238,22 +247,22 @@ Then('I should see the observer sorted in ascending order based on {string}', as
     let item_texts;
     let sorted_item_texts;
     switch (sort_by) {
-    case 'ID':
-        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
-        item_texts = await Promise.all(items.map((item) => item.getText()));
-        sorted_item_texts = [...item_texts].sort();
-        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
-        await new Promise(resolve => setTimeout(resolve, 500));
-        break;
-    case 'Username':
-        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
-        item_texts = await Promise.all(items.map((item) => item.getText()));
-        sorted_item_texts = [...item_texts].sort();
-        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
-        await new Promise(resolve => setTimeout(resolve, 500));
-        break;
-    default:
-        break;
+        case 'ID':
+            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
+            item_texts = await Promise.all(items.map((item) => item.getText()));
+            sorted_item_texts = [...item_texts].sort();
+            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
+            await new Promise(resolve => setTimeout(resolve, 500));
+            break;
+        case 'Username':
+            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
+            item_texts = await Promise.all(items.map((item) => item.getText()));
+            sorted_item_texts = [...item_texts].sort();
+            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in ascending order');
+            await new Promise(resolve => setTimeout(resolve, 500));
+            break;
+        default:
+            break;
     }
 });
 
@@ -263,23 +272,28 @@ Then('I should see the observer sorted in descending order based on {string}', a
     let item_texts;
     let sorted_item_texts;
     switch (sort_by) {
-    case 'ID':
-        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
-        item_texts = await Promise.all(items.map((item) => item.getText()));
-        sorted_item_texts = [...item_texts].sort().reverse();
-        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
-        await new Promise(resolve => setTimeout(resolve, 500));
-        break;
-    case 'Username':
-        items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
-        item_texts = await Promise.all(items.map((item) => item.getText()));
-        sorted_item_texts = [...item_texts].sort().reverse();
-        assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
-        await new Promise(resolve => setTimeout(resolve, 500));
-        break;
-    default:
-        break;
+        case 'ID':
+            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(2)`)));
+            item_texts = await Promise.all(items.map((item) => item.getText()));
+            sorted_item_texts = [...item_texts].sort().reverse();
+            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
+            await new Promise(resolve => setTimeout(resolve, 500));
+            break;
+        case 'Username':
+            items = await driver.wait(until.elementsLocated(By.css(`tbody > tr > td:nth-child(3)`)));
+            item_texts = await Promise.all(items.map((item) => item.getText()));
+            sorted_item_texts = [...item_texts].sort().reverse();
+            assert.deepStrictEqual(item_texts, sorted_item_texts, 'Items are not sorted in descending order');
+            await new Promise(resolve => setTimeout(resolve, 500));
+            break;
+        default:
+            break;
     }
 });
 
 
+Then('The Export button is disabled', async function () {
+    const button = await driver.wait(until.elementLocated(By.id('Export')));
+    const isDisabled = await button.getAttribute('disabled');
+    assert.strictEqual(isDisabled, 'true', 'Expected button with id Export to be disabled');
+});

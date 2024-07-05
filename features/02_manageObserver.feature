@@ -4,22 +4,22 @@ Feature: Manage Observers
     So that I can manage them effectively
 
 
-    # Scenario: Login with valid credentials
-    #     Given I am on the login page
-    #     When I enter my username as "roopesh.yadava@7edge.com"
-    #     And I enter my password as "Admin@1234"
-    #     And I click on the "login" button
-    #     Then I should see a dialog box to select preference for otp verification
-    #     When I click on the "Select Preference" button
-    #     And I select my Preference
-    #     And I click on the "send" button
-    #     Then I see otp verification page
-    #     When I enter otp as "981256"
-    #     And I click on the "verify otp" button
-    #     Then I should see a message Do you want to trust this browser
-    #     When I click on the "No, I Don't" button
-    #     Then I navigate to profile page
-    #     And I should see a message "Login successful"
+    Scenario: Login with valid credentials
+        Given I am on the login page
+        When I enter my username as "roopesh.yadava@7edge.com"
+        And I enter my password as "Admin@1234"
+        And I click on the "login" button
+        Then I should see a dialog box to select preference for otp verification
+        When I click on the "Select Preference" button
+        And I select my Preference
+        And I click on the "send" button
+        Then I see otp verification page
+        When I enter otp as "981256"
+        And I click on the "verify otp" button
+        Then I should see a message Do you want to trust this browser
+        When I click on the "No, I Don't" button
+        Then I navigate to profile page
+        And I should see a message "Login successful"
 
 
     Scenario Outline: Sort functionality
@@ -47,13 +47,6 @@ Feature: Manage Observers
             | unkown           | No exact matches found. Please try a different search |
 
 
-    Scenario Outline: Invalid Search with ID, First Name, Email
-        Given I am on the manage observer page
-        When I click on "Search" button
-        And  I enter text as "<details>"
-        Then I should see a message "<message>"
-        
-
     Scenario Outline: Filter functionality
         Given I am on the manage observer page
         When I click on filter
@@ -73,6 +66,21 @@ Feature: Manage Observers
         When I enter start date and end date
         When I apply the filter for observer
         Then I should see the date filter applied
+
+    # #Export button disabled
+    # Scenario: Export button disabled
+    #     Given I am on the manage observer page
+    #     When I click on "icon-export" button
+    #     And I click on "Clear-all" button
+    #     Then The Export button is disabled
+
+
+    #EXPORT
+    Scenario: Performing Export
+        Given I am on the manage observer page
+        When I click on "icon-export" button
+        * I click on "Export" button
+        Then I should see a message "Observers list exported successfully"
 
 
 
