@@ -20,7 +20,7 @@ Feature: Perform action on the observer
     #     And I should see a message "Login successful"
 
 
-    # View feature
+    # View feature for observer
     Scenario: Search for already existing observer with ID
         Given I am on the manage observer page
         When I search for a particular observer with ID
