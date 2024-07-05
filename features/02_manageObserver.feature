@@ -22,6 +22,18 @@ Feature: Manage Observers
     #     And I should see a message "Login successful"
 
 
+    Scenario Outline: Sort functionality
+        Given I am on the manage observer page
+        When I click on sort <sort>
+        Then I should see the observer sorted in ascending order based on <sort>
+        When I click on sort <sort>
+        And I should see the observer sorted in descending order based on <sort>
+        Examples:
+            | sort       |
+            | "ID"       |
+            | "Username" |
+
+
     Scenario Outline: Invalid Search with ID, First Name, Email
         Given I am on the manage observer page
         When I click on "Search" button
@@ -35,17 +47,12 @@ Feature: Manage Observers
             | unkown           | No exact matches found. Please try a different search |
 
 
-    Scenario Outline: Sort functionality
+    Scenario Outline: Invalid Search with ID, First Name, Email
         Given I am on the manage observer page
-        When I click on sort <sort>
-        Then I should see the observer sorted in ascending order based on <sort>
-        When I click on sort <sort>
-        And I should see the observer sorted in descending order based on <sort>
-        Examples:
-            | sort       |
-            | "ID"       |
-            | "Username" |
-
+        When I click on "Search" button
+        And  I enter text as "<details>"
+        Then I should see a message "<message>"
+        
 
     Scenario Outline: Filter functionality
         Given I am on the manage observer page
