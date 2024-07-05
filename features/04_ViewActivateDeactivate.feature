@@ -20,13 +20,14 @@ Feature: Perform action on the observer
     #     And I should see a message "Login successful"
 
 
+    # View feature
     Scenario: Search for already existing observer with ID
         Given I am on the manage observer page
         When I search for a particular observer with ID
         Then I should see the list of observer with the searched ID
         And I store the details of the observer
-        When I click on "action" button 
-        And I click on "view" button 
+        When I click on "action" button
+        And I click on "view" button
         Then I should be redirected to view page
         And I validate the details of the observer
 
@@ -38,19 +39,41 @@ Feature: Perform action on the observer
         Given I am on the manage observer page
         When I search for a particular observer with ID
         Then I should see the list of observer with the searched ID
-        When I click on "action" button 
-        And I click on "Activate" button 
+        When I click on "action" button
+        And I click on "Activate" button
         And I see a confirmation window for activation
-        And I click on "activate" button 
+        And I click on "activate" button
         Then I should see a message "Observer activated successfully"
 
     Scenario: Deactivate a Single Observer
         Given I am on the manage observer page
         When I search for a particular observer with ID
         Then I should see the list of observer with the searched ID
-        When I click on "action" button 
-        And I click on "Deactivate" button 
+        When I click on "action" button
+        And I click on "Deactivate" button
         And I see a confirmation window for deactivation
-        And I enter the comment 
+        And I enter the comment
         And I click on "deactivate" button
         Then I should see a message "Observer deactivated successfully"
+
+
+    # Activate and deactivate by using checkbox
+
+    Scenario: Activate a Single Observer
+        Given I am on the manage observer page
+        When I click on "Checkbox" button for ID = OBS000007191
+        And I click on "ThreeDot" button 
+        And I click on "Activate" button
+        And I see a confirmation window for activation
+        And I click on "activate" button
+        Then I should see a message "Observers activated successfully"
+
+    Scenario: Deactivate a Single Observer
+        Given I am on the manage observer page
+        When I click on "Checkbox" button for ID = OBS000007191
+        And I click on "ThreeDot" button 
+        And I click on "Deactivate" button
+        And I see a confirmation window for deactivation
+        And I enter the comment
+        And I click on "deactivate" button
+        Then I should see a message "Observers deactivated successfully"

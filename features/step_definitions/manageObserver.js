@@ -89,6 +89,9 @@ When('I click on {string} button', async function (button) {
         case 'deactivate':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('add_admin')));
             break;
+        case 'ThreeDot':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('threedot')));
+            break;
         default:
             console.log('Invalid button string');
             return;

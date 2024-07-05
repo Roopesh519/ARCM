@@ -71,3 +71,12 @@ When('I see a confirmation window for deactivation', async function () {
     await new Promise(resolve => setTimeout(resolve, 2000));
     await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Deactivate')]")));
 });
+
+
+When('I click on "Checkbox" button for ID = OBS000007191', async function() {
+    await driver.wait(until.elementLocated(By.id('OBS000007191')), 30000);
+        
+    await driver.executeScript("document.querySelector('#OBS000007191').click()");
+    
+    console.log('Clicked the checkbox');
+});
