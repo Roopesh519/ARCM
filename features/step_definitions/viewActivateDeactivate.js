@@ -54,3 +54,20 @@ Then('I validate the details of the observer', async function(){
         assert(isPresent, `The value ${value} for ${key} was not found in the page source`);
     }
 });
+
+
+When('I see a confirmation window for activation', async function () {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Activate')]")));
+});
+
+When('I enter the comment', async function () {
+    const commentInput = await global.driver.wait(until.elementLocated(By.id('Comment_here')));
+    await commentInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await commentInput.sendKeys('test');
+});
+
+When('I see a confirmation window for deactivation', async function () {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await global.driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Deactivate')]")));
+});

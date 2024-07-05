@@ -77,6 +77,18 @@ When('I click on {string} button', async function (button) {
         case 'view':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('View')));
             break;
+        case 'Activate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Activate')));
+            break;
+        case 'Deactivate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Deactivate')));
+            break;
+        case 'activate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('add_admin')));
+            break;
+        case 'deactivate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('add_admin')));
+            break;
         default:
             console.log('Invalid button string');
             return;
