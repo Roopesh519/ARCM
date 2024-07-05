@@ -3,7 +3,6 @@ Feature: Manage Organization Users
     I want to view the list of Organization Users
     So that I can manage them effectively
 
-
     # Scenario: Login with valid credentials
     #     Given I am on the login page
     #     When I enter my username as "rahul.mallya@7edge.com"
@@ -30,10 +29,11 @@ Feature: Manage Organization Users
         And I should see the Organization Users sorted in descending order based on <sort>
         Examples:
             | sort         |
-            | "ID"         |<sort>
+            | "ID"         |
             | "Username"   |
             | "First Name" |
             | "Status"     |
+            
     #SEARCH INVALID
     Scenario Outline: Invalid Search with ID, First Name, Email
         Given I am on the manage Organization Users page
