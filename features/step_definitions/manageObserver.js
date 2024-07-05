@@ -70,6 +70,13 @@ When('I click on {string} button', async function (button) {
         case 'No':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
             break;
+        case 'action':
+            const cellElement = await global.driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[13]`)));
+            buttonElement = await cellElement.findElement(By.id('id'));
+            break;
+        case 'view':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('View')));
+            break;
         default:
             console.log('Invalid button string');
             return;
@@ -352,3 +359,5 @@ Then('The Export button is disabled', async function () {
     const isDisabled = await button.getAttribute('disabled');
     assert.strictEqual(isDisabled, 'true', 'Expected button with id Export to be disabled');
 });
+
+
