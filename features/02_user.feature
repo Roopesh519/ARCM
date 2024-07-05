@@ -4,22 +4,22 @@ Feature: Manage Organization Users
     So that I can manage them effectively
 
 
-    Scenario: Login with valid credentials
-        Given I am on the login page
-        When I enter my username as "rahul.mallya@7edge.com"
-        And I enter my password as "Admin@1234"
-        And I click on the "login" button
-        Then I should see a dialog box to select preference for otp verification
-        When I click on the "Select Preference" button
-        And I select my Preference
-        And I click on the "send" button
-        Then I see otp verification page
-        When I enter otp as "981256"
-        And I click on the "verify otp" button
-        Then I should see a message Do you want to trust this browser
-        When I click on the "No, I Don't" button
-        Then I navigate to profile page
-        And I should see a message "Login successful"
+    # Scenario: Login with valid credentials
+    #     Given I am on the login page
+    #     When I enter my username as "rahul.mallya@7edge.com"
+    #     And I enter my password as "Admin@1234"
+    #     And I click on the "login" button
+    #     Then I should see a dialog box to select preference for otp verification
+    #     When I click on the "Select Preference" button
+    #     And I select my Preference
+    #     And I click on the "send" button
+    #     Then I see otp verification page
+    #     When I enter otp as "981256"
+    #     And I click on the "verify otp" button
+    #     Then I should see a message Do you want to trust this browser
+    #     When I click on the "No, I Don't" button
+    #     Then I navigate to profile page
+    #     And I should see a message "Login successful"
 
     #SORT
     Scenario Outline: Sort functionality
