@@ -67,13 +67,6 @@ Feature: Manage Observers
         When I apply the filter for observer
         Then I should see the date filter applied
 
-    # #Export button disabled
-    # Scenario: Export button disabled
-    #     Given I am on the manage observer page
-    #     When I click on "icon-export" button
-    #     And I click on "Clear-all" button
-    #     Then The Export button is disabled
-
 
     #EXPORT
     Scenario: Performing Export
