@@ -80,3 +80,9 @@ When('I click on "Checkbox" button for ID = OBS000007191', async function() {
     
     console.log('Clicked the checkbox');
 });
+
+
+Then('I am still on manage observer page', async function () {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await global.driver.wait(until.elementLocated(By.xpath(`//h1[text()="Manage Observers"]`)))
+});

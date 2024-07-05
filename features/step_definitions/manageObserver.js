@@ -92,6 +92,9 @@ When('I click on {string} button', async function (button) {
         case 'ThreeDot':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('threedot')));
             break;
+        case 'Cancel':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
+            break;
         default:
             console.log('Invalid button string');
             return;
