@@ -134,8 +134,6 @@ When('I search for a particular observer with ID', async function () {
 Then('I should see the list of observer with the searched ID', async function () {
     const idElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[2]`)));
     const searchedID = await idElement.getText();
-
-    console.log('Original ID:', this.ID, 'Searched ID:', searchedID);
     assert.strictEqual(searchedID, this.ID, 'The searched ID does not match the expected ID.');
 });
 
@@ -154,8 +152,6 @@ When('I search for a particular observer with username', async function () {
 Then('I should see the list of observer with the searched username', async function () {
     const usernameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[3]`)));
     const searchedUsername = await usernameElement.getText();
-
-    console.log('Original Username:', this.username, 'Searched Username:', searchedUsername);
     assert.strictEqual(searchedUsername, this.username, 'The searched username does not match the expected username.');
 });
 
@@ -174,8 +170,6 @@ When('I search for a particular observer with the first name', async function ()
 Then('I should see the list of observer with the searched firstname', async function () {
     const firstNameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[4]`)));
     const searchedFirstName = await firstNameElement.getText();
-
-    console.log('Original First Name:', this.firstname, 'Searched First Name:', searchedFirstName);
     assert.strictEqual(searchedFirstName, this.firstname, 'The searched first name does not match the expected first name.');
 });
 

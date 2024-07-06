@@ -20,6 +20,7 @@ AfterAll(async function () {
 Given('I am on the login page', async function () {
     await driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/');
     await new Promise(resolve => setTimeout(resolve, 500));
+    await driver.manage().window().maximize(); 
     await driver.wait(until.elementLocated(By.xpath('//*[text()="Login"]')));
 });
 
