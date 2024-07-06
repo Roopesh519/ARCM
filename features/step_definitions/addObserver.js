@@ -63,7 +63,7 @@ Then('I should see a pop up box for confirmation', async function () {
 
 
 When('I enter username', async function () {
-    const username = `testops+${faker.string.alphanumeric(10)}@7edge.com`; // Correct method for alphanumeric string
+    const username = `testops+${faker.string.numeric(10)}@7edge.com`; // Correct method for alphanumeric string
     const usernameInput = await driver.wait(until.elementLocated(By.id('user_name')));
     await usernameInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
     await usernameInput.sendKeys(username);
@@ -84,14 +84,14 @@ When('I enter last name', async function () {
 });
 
 When('I enter mobile number', async function () {
-    const mobileNumber = faker.string.numeric(10);
+    const mobileNumber = `99726${faker.string.numeric(5)}`;
     const mobileNumberInput = await driver.wait(until.elementLocated(By.id('mobile_number')));
     await mobileNumberInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
     await mobileNumberInput.sendKeys(mobileNumber);
 });
 
 When('I enter main number', async function () {
-    const mainNumber = faker.string.numeric(10);
+    const mainNumber = `99726${faker.string.numeric(5)}`;
     const mainNumberInput = await driver.wait(until.elementLocated(By.id('main_number')));
     await mainNumberInput.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
     await mainNumberInput.sendKeys(mainNumber);

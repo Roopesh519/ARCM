@@ -65,4 +65,8 @@ Feature: Add Observer
         And I click on "No" button
         # Then I should see a message "Observer added successfully"
 
-
+#     Scenario: Check Email Validation for Already Verified
+#         Given I am on the manage observer page
+#         Given I am in searched update observer page
+#         When  I enter already verified email address
+#         Then  I should see status of email is verified
