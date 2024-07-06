@@ -51,7 +51,7 @@ Feature: Login feature
         When I click on the "Forgot password" button
         Then I must navigate to Forgot Password page
         When I enter wrong username
-        And I click on the "Request Reset Link" button
+        * I click on the "Request Reset Link" button
         Then I should see a message "Incorrect username"
 
 
@@ -60,7 +60,7 @@ Feature: Login feature
         When I click on the "Forgot password" button
         Then I must navigate to Forgot Password page
         When I enter my username as "rahul.mallya@7edge.com"
-        And I click on the "Request Reset Link" button
+        * I click on the "Request Reset Link" button
         Then I should see a message "Password reset link has been sent to your registered email address"
     # forgot password end
 
@@ -80,11 +80,11 @@ Feature: Login feature
     Scenario: Return to login from OTP Verification
         Given I am on the login page
         When I enter my username as "rahul.mallya@7edge.com"
-        And I enter my password as "Admin@1234"
+        * I enter my password as "Admin@1234"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
-        And I select my Preference
+        * I select my Preference
         * I click on the "send" button
         Then I see otp verification page
         When I click on the "Back to Login" button
@@ -94,26 +94,26 @@ Feature: Login feature
     Scenario: Login with invalid otp
         Given I am on the login page
         When I enter my username as "rahul.mallya@7edge.com"
-        And I enter my password as "Admin@1234"
+        * I enter my password as "Admin@1234"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
-        And I select my Preference
+        * I select my Preference
         * I click on the "send" button
         Then I see otp verification page
         When I enter otp as "982134"
-        And I click on the "verify otp" button
+        * I click on the "verify otp" button
         Then I should see a message "You entered an invalid OTP.Please try again"
 
 
     Scenario: Resend OTP
         Given I am on the login page
         When I enter my username as "rahul.mallya@7edge.com"
-        And I enter my password as "Admin@1234"
+        * I enter my password as "Admin@1234"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
-        And I select my Preference
+        * I select my Preference
         * I click on the "send" button
         Then I see otp verification page
         When I click on the "Resend OTP" button
@@ -124,16 +124,17 @@ Feature: Login feature
     Scenario: Login with valid credentials
         Given I am on the login page
         When I enter my username as "rahul.mallya@7edge.com"
-        And I enter my password as "Admin@1234"
+        * I enter my password as "Admin@1234"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification
         When I click on the "Select Preference" button
-        And I select my Preference
+        * I select my Preference
         * I click on the "send" button
         Then I see otp verification page
         When I enter otp as "981256"
-        And I click on the "verify otp" button
+        * I click on the "verify otp" button
         Then I should see a message Do you want to trust this browser
         When I click on the "No, I Don't" button
         Then I navigate to profile page
-        And I should see a message "Login successful"
+        * I should see a message "Login successful"
+        

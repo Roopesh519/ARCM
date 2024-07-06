@@ -5,24 +5,6 @@ const { By, Key, Builder, until } = require('selenium-webdriver');
 setDefaultTimeout(60 * 1000);
 
 
-// Given('I am on the manager observer page', async function(){
-//     await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users');
-//     await new Promise(resolve => setTimeout(resolve, 1000));
-//     await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Manage Organization Users"]')));
-// });
-
-// Given('I am on the Add Organization User page', async function(){
-//     await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users/addOrganizationUser');
-//     await new Promise(resolve => setTimeout(resolve, 1000));
-//     await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Add Organization User"]')));
-// });
-
-// Then('I should navigate to the Add Organization User page', async function (){
-//     // await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users/addOrganizationUser');
-//     await new Promise(resolve => setTimeout(resolve, 1000));
-//     await global.driver.wait(until.elementLocated(By.xpath('//*[text()="Add Organization User"]')));
-// });
-
 Given('I am on the add Organization Users page', async function(){
     await global.driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/manage-organization-users/addOrganizationUser');
     await new Promise(resolve => setTimeout(resolve, 1000));

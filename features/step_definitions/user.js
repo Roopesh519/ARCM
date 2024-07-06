@@ -1,10 +1,9 @@
 const assert = require('assert');
 const { BeforeAll, AfterAll, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
 const { By, Key, Keys, Builder, until } = require('selenium-webdriver');
-const moment = require("moment")
-const { format, subDays, parse } = require('date-fns');
 
 setDefaultTimeout(60 * 1000);
+this.searchID = 'ORG000005907';
 
 
 Given('I am in my profile page', async function () {
@@ -61,7 +60,35 @@ When('I click on {string} button', async function (button) {
             break;
         case 'Check':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('0')));
-            break;       
+            break;
+        case 'view':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('View')));
+            break;
+        case 'action':
+            cellElement = await driver.wait(until.elementLocated(By.xpath('//tbody/tr[1]/td[12]')));
+            buttonElement = await cellElement.findElement(By.id('id'));
+            break;
+        case 'Activate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Activate')));
+            break;
+        case 'Deactivate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Deactivate')));
+            break;
+        case 'activate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('add_admin')));
+            break;
+        case 'deactivate':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('add_admin')));
+            break;
+        case 'ThreeDot':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('threedot')));
+            break;
+        case 'Cancel':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
+            break;
+        case 'No':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
+            break;
         default:
             console.log('Invalid button string');
             return;
@@ -129,13 +156,13 @@ When('I click on sort {string}', async function (sort_by) {
             await new Promise(resolve => setTimeout(resolve, 1000));
             break;
         case 'First Name':
-                // Write code here that turns the phrase above into concrete actions
+            // Write code here that turns the phrase above into concrete actions
             await new Promise(resolve => setTimeout(resolve, 1000));
             await driver.wait(until.elementLocated(By.id(`first`))).click()
             await new Promise(resolve => setTimeout(resolve, 1000));
             break;
         case 'Status':
-                // Write code here that turns the phrase above into concrete actions
+            // Write code here that turns the phrase above into concrete actions
             await new Promise(resolve => setTimeout(resolve, 1000));
             await driver.wait(until.elementLocated(By.id(`status`))).click()
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -214,4 +241,34 @@ Then('The Export button is disabled', async function () {
     const button = await driver.wait(until.elementLocated(By.id('Export')));
     const isDisabled = await button.getAttribute('disabled');
     assert.strictEqual(isDisabled, 'true', 'Expected button with id Export to be disabled');
+});
+
+When('I search for a particular user with ID', async function () {
+    const idElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[2]`)));
+    const userID = await idElement.getText();
+    this.ID = this.searchID;
+
+    const searchField = await driver.findElement(By.id(`search-value`));
+    await searchField.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await searchField.sendKeys(userID);
+    console.log('User ID: ', this.ID);
+    await new Promise(resolve => setTimeout(resolve, 1500)); // wait for 1.5 seconds
+});
+
+Then('I should see the list of user with the searched ID', async function () {
+    const idElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[2]`)));
+    const searchedID = await idElement.getText();
+    console.log('searchID: ', this.searchedID, 'expectedId: ', this.ID);
+    assert.strictEqual(this.searchID, this.ID, 'The searched ID does not match the expected ID.');
+});
+
+When('I search for a particular user with username', async function () {
+    const usernameElement = await driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[3]`)));
+    const organizationUsername = await usernameElement.getText();
+    this.username = organizationUsername;
+
+    const searchField = await driver.findElement(By.id(`search-value`));
+    await searchField.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.DELETE);
+    await searchField.sendKeys(organizationUsername);
+    await new Promise(resolve => setTimeout(resolve, 1500)); // wait for 1.5 seconds
 });

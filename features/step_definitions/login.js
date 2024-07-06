@@ -20,6 +20,7 @@ AfterAll(async function () {
 Given('I am on the login page', async function () {
     await driver.get('https://cs0275-dev-organization.accessibleremotecaremanagement.net/');
     await new Promise(resolve => setTimeout(resolve, 500));
+    await driver.manage().window().maximize();
     await driver.wait(until.elementLocated(By.xpath('//*[text()="Login"]')));
 });
 
@@ -72,6 +73,13 @@ When('I click on the {string} button', async function (button) {
             await new Promise(resolve => setTimeout(resolve, 1000));
             buttonElement = await driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Back to Login")]')));
             break;
+        case 'action':
+            cellElement = await driver.wait(until.elementLocated(By.xpath('//tbody/tr[1]/td[12]')));
+            buttonElement = await cellElement.findElement(By.id('id'));
+            break;
+        case 'view':
+            buttonElement = await driver.executeScript('return document.querySelector("#View")');
+            break;  
         default:
             console.log('Invalid button string');
             return;

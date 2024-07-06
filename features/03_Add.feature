@@ -4,27 +4,28 @@ Feature: Add Organization Users
 
     # Scenario: Login with valid credentials
     #     Given I am on the login page
-    #     When I enter my username as "roopesh.yadava@7edge.com"
-    #     And I enter my password as "Admin@1234"
+    #     When I enter my username as "rahul.mallya@7edge.com"
+    #     * I enter my password as "Admin@1234"
     #     * I click on the "login" button
     #     Then I should see a dialog box to select preference for otp verification
     #     When I click on the "Select Preference" button
-    #     And I select my Preference
+    #     * I select my Preference
     #     * I click on the "send" button
     #     Then I see otp verification page
     #     When I enter otp as "981256"
-    #     And I click on the "verify otp" button
+    #     * I click on the "verify otp" button
     #     Then I should see a message Do you want to trust this browser
     #     When I click on the "No, I Don't" button
     #     Then I navigate to profile page
-    #     And I should see a message "Login successful"
+    #     * I should see a message "Login successful"
+        
 
 
     Scenario: Add Organization Users
         Given I am on the manage Organization Users page
         # When I click on "Add Organization Users" button
         # Then I should navigate to the add Organization Users page
-        And I am on the add Organization Users page
+        * I am on the add Organization Users page
         When I enter username as "<UserName>"
         And I enter first name as "<FirstName>"
         * I enter last name as "<LastName>"
@@ -59,7 +60,7 @@ Feature: Add Organization Users
         * I click on "User" button
         When I click on "submit" button
         Then I should see a message "Are you sure you want to add this organization user?"
-        When I click on "" button                        
+        When I click on "No" button                        
         # have not added YES in above line so that it doesnot create new user
-        Then I should see a message "Organization user added successfully"
+        # Then I should see a message "Organization user added successfully"
 
