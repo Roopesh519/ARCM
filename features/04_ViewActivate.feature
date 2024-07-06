@@ -19,7 +19,7 @@ Feature: Perform action on the Organization User
 #         Then I navigate to profile page
 #         * I should see a message "Login successful"
 
-    Scenario: Search for already existing observer with ID
+    Scenario: Search for already existing user with ID
         Given I am on the manage Organization Users page
         When I search for a particular user with ID
         Then I should see the list of user with the searched ID
@@ -29,7 +29,7 @@ Feature: Perform action on the Organization User
         Then I should be redirected to view page
         And I validate the details of the user
 
-     Scenario: Cancel Activate a Single Observer
+     Scenario: Cancel Activate a Single user
         Given I am on the manage Organization Users page
         When I search for a particular user with ID
         Then I should see the list of user with the searched ID
@@ -40,7 +40,7 @@ Feature: Perform action on the Organization User
         Then I am still on manage Organization User page
 
     # Happy
-    Scenario: Activate a Single Observer
+    Scenario: Activate a Single user
         Given I am on the manage Organization Users page
         When I search for a particular user with ID
         Then I should see the list of user with the searched ID
@@ -51,7 +51,7 @@ Feature: Perform action on the Organization User
         Then I should see a message "Organization user activated successfully"
 
     # Unhappy
-    Scenario: Cancel Deactivate a Single Observer
+    Scenario: Cancel Deactivate a Single user
         Given I am on the manage Organization Users page
         When I search for a particular user with ID
         Then I should see the list of user with the searched ID
@@ -63,7 +63,7 @@ Feature: Perform action on the Organization User
         Then I am still on manage Organization User page
 
     # Happy
-    Scenario: Deactivate a Single Observer
+    Scenario: Deactivate a Single user
         Given I am on the manage Organization Users page
         When I search for a particular user with ID
         Then I should see the list of user with the searched ID
@@ -77,7 +77,7 @@ Feature: Perform action on the Organization User
 
     # Activate and deactivate by using checkbox
     # Unhappy
-    Scenario: Cancel Activate a Single Observer
+    Scenario: Cancel Activate a Single user
         Given I am on the manage Organization Users page
         When I click on "Checkbox" button for ID = ORG000005907
         And I click on "ThreeDot" button 
@@ -87,7 +87,7 @@ Feature: Perform action on the Organization User
         Then I am still on manage Organization User page
 
     # Happy
-    Scenario: Activate a Single Observer
+    Scenario: Activate a Single user
         Given I am on the manage Organization Users page
         When I click on "Checkbox" button for ID = ORG000005907
         And I click on "ThreeDot" button 
@@ -97,7 +97,7 @@ Feature: Perform action on the Organization User
         Then I should see a message "Organization users activated successfully"
 
     # Unhappy
-    Scenario: Cancel Deactivate a Single Observer
+    Scenario: Cancel Deactivate a Single user
         Given I am on the manage Organization Users page
         When I click on "Checkbox" button for ID = ORG000005907
         And I click on "ThreeDot" button 
@@ -108,7 +108,7 @@ Feature: Perform action on the Organization User
         Then I am still on manage Organization User page
 
     # Happy
-    Scenario: Deactivate a Single Observer
+    Scenario: Deactivate a Single user
         Given I am on the manage Organization Users page
         When I click on "Checkbox" button for ID = ORG000005907
         And I click on "ThreeDot" button 
