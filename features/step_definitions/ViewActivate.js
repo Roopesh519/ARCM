@@ -39,7 +39,7 @@ Then('I validate the details of the user', async function(){
     // Array of keys in the order they are stored
     const keys = Object.keys(this.firstRowData);
 
-    // Iterate over each key-value pair in the stored data, skipping the 7th field
+    // Iterate over each key-value pair in the stored data.
     for (let i = 0; i < keys.length; i++) {
         if (i === 7) continue;
         if (i === 8) continue; 
