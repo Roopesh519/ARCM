@@ -34,8 +34,8 @@ When('I click on {string} button', async function (button) {
         case 'Add Organization Users':
             buttonElement = await global.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Add Organization Users")]')));
             break;
-        case 'Sub Division Name':
-            buttonElement = await global.driver.wait(until.elementLocated(By.id('sub_division_name')));
+        case 'Sub Divisions':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('sub_divisions')));
             break;
         case 'Subdivision':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('0subdivision')));
@@ -57,9 +57,6 @@ When('I click on {string} button', async function (button) {
             break;
         case 'Export':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Export')));
-            break;
-        case 'Check':
-            buttonElement = await global.driver.wait(until.elementLocated(By.id('0')));
             break;
         case 'view':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('View')));
@@ -89,6 +86,14 @@ When('I click on {string} button', async function (button) {
         case 'No':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
             break;
+        case 'submit':
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('update')));
+            break;
+        case 'SUB000000039-Sub - 1':
+            // buttonElement = await global.driver.wait(until.elementLocated(By.id('update')));
+            const elementXPath = `//*[text()="SUB000000039-Sub - 1"]`;
+            buttonElement = await global.driver.wait(until.elementLocated(By.xpath(elementXPath)), 10000);
+            break;
         default:
             console.log('Invalid button string');
             return;
@@ -96,11 +101,9 @@ When('I click on {string} button', async function (button) {
     await buttonElement.click();
 });
 //XPATH for SUB000000039-Sub - 1
-When('I click on {string}', async function (elementText) {
-    const elementXPath = `//*[text()="${elementText}"]`;
-    const element = await global.driver.wait(until.elementLocated(By.xpath(elementXPath)), 10000);
-    await element.click();
-});
+// When('I click on {string} button', async function (elementText) {
+
+// });
 
 
 Then('I should see a table with the following columns:', async function (dataTable) {

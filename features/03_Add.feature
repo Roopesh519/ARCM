@@ -2,24 +2,23 @@ Feature: Add Organization Users
     As a admin
     I want to add Organization Users
 
-    # Scenario: Login with valid credentials
-    #     Given I am on the login page
-    #     When I enter my username as "rahul.mallya@7edge.com"
-    #     * I enter my password as "Admin@1234"
-    #     * I click on the "login" button
-    #     Then I should see a dialog box to select preference for otp verification
-    #     When I click on the "Select Preference" button
-    #     * I select my Preference
-    #     * I click on the "send" button
-    #     Then I see otp verification page
-    #     When I enter otp as "981256"
-    #     * I click on the "verify otp" button
-    #     Then I should see a message Do you want to trust this browser
-    #     When I click on the "No, I Don't" button
-    #     Then I navigate to profile page
-    #     * I should see a message "Login successful"
+    Scenario: Login with valid credentials
+        Given I am on the login page
+        When I enter my username as "rahul.mallya@7edge.com"
+        * I enter my password as "Admin@1234"
+        * I click on the "login" button
+        Then I should see a dialog box to select preference for otp verification
+        When I click on the "Select Preference" button
+        * I select my Preference
+        * I click on the "send" button
+        Then I see otp verification page
+        When I enter otp as "981256"
+        * I click on the "verify otp" button
+        Then I should see a message Do you want to trust this browser
+        When I click on the "No, I Don't" button
+        Then I navigate to profile page
+        * I should see a message "Login successful"
         
-
 
     Scenario: Add Organization Users
         Given I am on the add Organization Users page
@@ -42,22 +41,19 @@ Feature: Add Organization Users
             | user@domain.com  | John      |          | 9999999999   | 9999999999 | Please fill in all the mandatory fields |
             | user@domain.com  | John      | Doe      | 9999999999   |            | Please fill in all the mandatory fields |
 
-        
-    #HAPPY PATH
-    Scenario:Create New User success
+
+    Scenario: Adding user with correct credentials
         Given I am on the Add Organization User page
-        When I enter username as "rama@7edge.com"
-        When I enter first name as "ram"
-        * I enter last name as "Sharma"
-        * I enter mobile number as "7894567894"
-        * I enter main number as "7894567894"
-        * I click on "Sub Divisions" button
-        # * I click on "Clear All" button
-        * I click on "SUB000000039-Sub - 1" button
-        * I click on "User" button
+        When I enter username
+        And I enter first name
+        * I enter last name
+        * I enter mobile number
+        * I enter main number
+         * I click on "Sub Divisions" button
+        * I click on SUBS button
+        * I click on User button
         When I click on "submit" button
         Then I should see a message "Are you sure you want to add this organization user?"
-        When I click on "No" button                        
+        When I click on "Yes" button                        
         # have not added YES in above line so that it doesnot create new user
-        # Then I should see a message "Organization user added successfully"
-
+         Then I should see a message "Organization user added successfully"
