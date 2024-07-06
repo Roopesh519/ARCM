@@ -48,11 +48,11 @@ Feature: Add Observer
     # happy
     Scenario: Adding user with correct credentials
         Given I am on the add observer page
-        When I enter username as "testuser+62171876@7edge.com"
-        And I enter first name as "testuser123"
-        * I enter last name as "shettigar"
-        * I enter mobile number as "9876487354"
-        * I enter main number as "9876487354"
+        When I enter username
+        And I enter first name
+        * I enter last name
+        * I enter mobile number
+        * I enter main number
         * I enter address as "mangalore"
         * I click on "Sub Division Name" button
         * I click on "Subdivision" button
