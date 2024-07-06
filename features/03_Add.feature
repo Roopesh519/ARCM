@@ -22,10 +22,7 @@ Feature: Add Organization Users
 
 
     Scenario: Add Organization Users
-        Given I am on the manage Organization Users page
-        # When I click on "Add Organization Users" button
-        # Then I should navigate to the add Organization Users page
-        * I am on the add Organization Users page
+        Given I am on the add Organization Users page
         When I enter username as "<UserName>"
         And I enter first name as "<FirstName>"
         * I enter last name as "<LastName>"

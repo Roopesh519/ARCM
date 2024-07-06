@@ -41,7 +41,6 @@ Then('I validate the details of the user', async function(){
 
     // Iterate over each key-value pair in the stored data, skipping the 7th field
     for (let i = 0; i < keys.length; i++) {
-        //if (i === 5) continue; 
         if (i === 7) continue;
         if (i === 8) continue; 
         const key = keys[i];
