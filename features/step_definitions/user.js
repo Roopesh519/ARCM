@@ -100,11 +100,6 @@ When('I click on {string} button', async function (button) {
     }
     await buttonElement.click();
 });
-//XPATH for SUB000000039-Sub - 1
-// When('I click on {string} button', async function (elementText) {
-
-// });
-
 
 Then('I should see a table with the following columns:', async function (dataTable) {
     // Verify the table headers
