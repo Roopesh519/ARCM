@@ -1,6 +1,7 @@
 const assert = require('assert');
 const { BeforeAll, AfterAll, Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
 const { By, Key, Builder, until } = require('selenium-webdriver');
+const { Console } = require('console');
 
 setDefaultTimeout(60 * 1000);
 
@@ -13,6 +14,7 @@ BeforeAll(async function () {
 
 
 AfterAll(async function () {
+    console.log("View, Activate, Deactivate completed")
     await driver.sleep(5000);
     await driver.quit();
 });
@@ -54,6 +56,7 @@ When('I click on the {string} button', async function (button) {
             break;
         case "No, I Don't":
             buttonElement = await driver.wait(until.elementLocated(By.id('Cancel')));
+            console.log("Login Completed Successfully");
             break;
         case 'Cancel':
             buttonElement = await driver.wait(until.elementLocated(By.id('Cancel')));
@@ -124,7 +127,7 @@ Then('I should see a message {string}', async function (message) {
         check = pageSource.includes(message);
     
         if (check) {
-            console.log("checked");
+            console.log(`${message} = checked`);
             return "passed";
         } else {
             console.log("else block");

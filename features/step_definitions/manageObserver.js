@@ -67,9 +67,11 @@ When('I click on {string} button', async function (button) {
             break;
         case 'Export':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Export')));
+            console.log("List, Sort, Search and Filter Completed");
             break;
         case 'No':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('Cancel')));
+            console.log("Add Observer completed");
             break;
         case 'action':
             const cellElement = await global.driver.wait(until.elementLocated(By.xpath(`//tbody/tr[1]/td[13]`)));
