@@ -8,11 +8,11 @@ Feature: Manage Observers
     #     Given I am on the login page
     #     When I enter my username as "roopesh.yadava@7edge.com"
     #     And I enter my password as "Admin@1234"
-    #     And I click on the "login" button
+    #     * I click on the "login" button
     #     Then I should see a dialog box to select preference for otp verification
     #     When I click on the "Select Preference" button
     #     And I select my Preference
-    #     And I click on the "send" button
+    #     * I click on the "send" button
     #     Then I see otp verification page
     #     When I enter otp as "981256"
     #     And I click on the "verify otp" button
@@ -84,21 +84,21 @@ Feature: Manage Observers
     Scenario Outline: Filter functionality
         Given I am on the manage observer page
         When I click on filter
-        When I click on the filter by the <status>
-        When I apply the filter for observer
-        Then I should see the list of observer with status as <status>
+        And I click on the filter by the "<status>"
+        * I apply the filter for observer
+        Then I should see the list of observer with status as "<status>"
 
         Examples:
-            | status     |
-            | "Active"   |
-            | "Inactive" |
+            | status   |
+            | Active   |
+            | Inactive |
 
 
     Scenario:Filter By Created Date
         Given I am on the manage observer page
         When I click on filter
-        When I enter start date and end date
-        When I apply the filter for observer
+        And I enter start date and end date
+        * I apply the filter for observer
         Then I should see the date filter applied
 
 
@@ -106,7 +106,7 @@ Feature: Manage Observers
     Scenario: Performing Export
         Given I am on the manage observer page
         When I click on "icon-export" button
-        * I click on "Export" button
+        And I click on "Export" button
         Then I should see a message "Observers list exported successfully"
 
 

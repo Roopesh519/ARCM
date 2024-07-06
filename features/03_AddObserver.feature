@@ -22,9 +22,8 @@ Feature: Add Observer
 
     Scenario: Add Observer
         Given I am on the manager observer page
-        # When I click on "Add Observer" button
-        # Then I should navigate to the add observer page
-        And I am on the add observer page
+        When I click on "Add Observer" button
+        Then I am on the add observer page
         When I enter username as "<UserName>"
         And I enter first name as "<FirstName>"
         * I enter last name as "<LastName>"

@@ -36,6 +36,7 @@ When('I click on {string} button', async function (button) {
             break;
         case 'Add Observer':
             buttonElement = await global.driver.wait(until.elementLocated(By.xpath('//*[contains(text(), "Add Observer")]')));
+            buttonElement = await global.driver.wait(until.elementLocated(By.id('Add user')));
             break;
         case 'Sub Division Name':
             buttonElement = await global.driver.wait(until.elementLocated(By.id('sub_division_name')));
