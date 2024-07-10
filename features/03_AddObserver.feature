@@ -4,8 +4,8 @@ Feature: Add Observer
 
     # Scenario: Login with valid credentials
     #     Given I am on the login page
-    #     When I enter my username as "roopesh.yadava@7edge.com"
-    #     And I enter my password as "Admin@1234"
+    #     When I enter my username as "sample@gmail.com"
+    #     And I enter my password as "password"
     #     * I click on the "login" button
     #     Then I should see a dialog box to select preference for otp verification
     #     When I click on the "Select Preference" button
@@ -65,3 +65,9 @@ Feature: Add Observer
         And I click on "No" button
         # Then I should see a message "Observer added successfully"
 
+#     Scenario: Check Email Validation for Already Verified
+#         Given I am on the manage observer page
+#         Given I am in searched update observer page
+#         When  I enter already verified email address
+#         Then  I should see status of email is verified
+    

@@ -21,8 +21,8 @@ Feature: Login feature
 
     Scenario: Cancel preference selection
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
+        When I enter my username as "sample@gmail.com"
+        And I enter my password as "password"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification
         When I click on the "Select Preference" button
@@ -59,7 +59,7 @@ Feature: Login feature
         Given I am on the login page
         When I click on the "Forgot password" button
         Then I must navigate to Forgot Password page
-        When I enter my username as "roopesh.yadava@7edge.com"
+        When I enter my username as ""
         And I click on the "Request Reset Link" button
         Then I should see a message "Password reset link has been sent to your registered email address"
     # forgot password end
@@ -67,8 +67,8 @@ Feature: Login feature
     # adding otp verification feature
     Scenario: Login with empty otp
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
+        When I enter my username as "sample@gmail.com"
+        And I enter my password as "password"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
@@ -79,8 +79,8 @@ Feature: Login feature
 
     Scenario: Return to login from OTP Verification
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
+        When I enter my username as "sample@gmail.com"
+        And I enter my password as "password"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
@@ -93,8 +93,8 @@ Feature: Login feature
 
     Scenario: Login with invalid otp
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
+        When I enter my username as "sample@gmail.com"
+        And I enter my password as "password"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
@@ -108,8 +108,8 @@ Feature: Login feature
 
     Scenario: Resend OTP
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
+        When I enter my username as "sample@gmail.com"
+        And I enter my password as "password"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification 
         When I click on the "Select Preference" button
@@ -123,8 +123,8 @@ Feature: Login feature
     #happy
     Scenario: Login with valid credentials
         Given I am on the login page
-        When I enter my username as "roopesh.yadava@7edge.com"
-        And I enter my password as "Admin@1234"
+        When I enter my username as "sample@gmail.com"
+        And I enter my password as "password"
         * I click on the "login" button
         Then I should see a dialog box to select preference for otp verification
         When I click on the "Select Preference" button

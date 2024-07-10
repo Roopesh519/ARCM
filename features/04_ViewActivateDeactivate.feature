@@ -4,8 +4,8 @@ Feature: Perform action on the observer
 
     # Scenario: Login with valid credentials
     #     Given I am on the login page
-    #     When I enter my username as "roopesh.yadava@7edge.com"
-    #     And I enter my password as "Admin@1234"
+    #     When I enter my username as "sample@gmail.com"
+    #     And I enter my password as "password"
     #     And I click on the "login" button
     #     Then I should see a dialog box to select preference for otp verification
     #     When I click on the "Select Preference" button
